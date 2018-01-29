@@ -10,7 +10,7 @@
         <module name="web" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8">
       <module name="casaferre" target="1.8" />
       <module name="common" target="1.8" />
       <module name="web" target="1.8" />
