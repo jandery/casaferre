@@ -36,14 +36,14 @@ public class SwedishSsn {
 
 
     /**
+     * Validate a Swedish SSN to validate if checksum is correct
      *
-     * @param ssn
-     * @return
+     * @param ssn Swedish SSN
+     * @return True if checksum matches else fals
      */
     public static boolean validateSsnWithChecksum(String ssn) {
-
+        // Fix SSN to match YYMMDDXXXZ
         ssn = fixSwedishSsn(ssn);
-
         if (ssn == null) {
             return false;
         }
@@ -65,7 +65,7 @@ public class SwedishSsn {
         ssn = ssn.replaceAll("-", "");
 
         if (SWEDISH_SSN_PATTERN_FULL.matcher(ssn).matches()) {
-            return ssn.substring(3);
+            return ssn.substring(2);
         }
         if (SWEDISH_SSN_PATTERN_SHORT.matcher(ssn).matches()) {
             return ssn;
