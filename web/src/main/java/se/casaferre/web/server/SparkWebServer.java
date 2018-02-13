@@ -3,6 +3,8 @@ package se.casaferre.web.server;
 import com.google.gson.Gson;
 import se.casaferre.common.Temperature;
 import se.casaferre.common.Volume;
+import se.casaferre.config.ConfigVariable;
+import se.casaferre.security.GoogleAuthentication;
 
 import static spark.Spark.*;
 
@@ -15,6 +17,7 @@ public class SparkWebServer {
 
     public static void main(String[] args) {
         //
+        port(Integer.parseInt(ConfigVariable.getValue(ConfigVariable.PORT)));
         staticFiles.location("/site");
         //
         path("/api", () -> {
@@ -37,6 +40,27 @@ public class SparkWebServer {
                     return gson.toJson(Volume.setLiter(volume));
                 });
             });
+            // MID 99
+            path("/mid", () -> {
+                // Make sure use is authenticated
+                before((request, response) -> {
+                    String authCookie = request.cookie("midauth");
+                    boolean authenticated = new GoogleAuthentication().isAuthenticated(authCookie);
+                    // ... check if authenticated
+                    if (!authenticated) {
+                        halt(401, "You are not welcome here");
+                    }
+                });
+
+                get("/menu", (request, response) -> {
+                    return "";
+                });
+            });
         });
+
+        System.out.println("*********************************************");
+        System.out.println("****  Spark server started on port " + port() + "  ****");
+        System.out.println("*********************************************");
+
     }
 }

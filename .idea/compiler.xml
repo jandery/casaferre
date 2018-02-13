@@ -7,12 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="common" />
+        <module name="config" />
         <module name="web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="casaferre" target="1.8" />
       <module name="common" target="1.8" />
+      <module name="config" target="1.8" />
       <module name="web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
