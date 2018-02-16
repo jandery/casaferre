@@ -1,6 +1,4 @@
 
-var something : string = "Jörgen";
-
 class Cell {
     private base : number = 2;
     private _value : number;

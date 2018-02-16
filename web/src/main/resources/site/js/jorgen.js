@@ -1,4 +1,3 @@
-var something = "Jörgen";
 var Cell = /** @class */ (function () {
     function Cell(index) {
         this.index = index;
