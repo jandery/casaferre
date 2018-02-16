@@ -19,6 +19,7 @@ public class SparkWebServer {
         //
         port(Integer.parseInt(ConfigVariable.getValue(ConfigVariable.PORT)));
         staticFiles.location("/site");
+        staticFiles.expireTime(0);
         //
         path("/api", () -> {
             Gson gson = new Gson();

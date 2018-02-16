@@ -47,7 +47,3 @@ var Cells = /** @class */ (function () {
     };
     return Cells;
 }());
-window.onload = function () {
-    var cells = new Cells();
-    cells.initTable();
-};

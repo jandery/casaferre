@@ -37,6 +37,7 @@ class Cells {
         this.cells = list.reverse();
     }
 
+
     initTable() {
         this.cells.forEach((cell, index) => {
             this.tableRows.item(0).appendChild(cell.exponentCell);
@@ -45,7 +46,3 @@ class Cells {
     }
 }
 
-window.onload = () => {
-    var cells = new Cells();
-    cells.initTable();
-};
