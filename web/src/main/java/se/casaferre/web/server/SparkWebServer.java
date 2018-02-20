@@ -1,10 +1,13 @@
 package se.casaferre.web.server;
 
 import com.google.gson.Gson;
+import lombok.val;
 import se.casaferre.common.Temperature;
 import se.casaferre.common.Volume;
 import se.casaferre.config.ConfigVariable;
 import se.casaferre.security.GoogleAuthentication;
+
+import java.nio.file.Paths;
 
 import static spark.Spark.*;
 
@@ -16,10 +19,11 @@ import static spark.Spark.*;
 public class SparkWebServer {
 
     public static void main(String[] args) {
+        val currentPath = Paths.get("").toAbsolutePath().toString();
+
         //
         port(Integer.parseInt(ConfigVariable.getValue(ConfigVariable.PORT)));
         staticFiles.location("/site");
-        staticFiles.expireTime(0);
         //
         path("/api", () -> {
             Gson gson = new Gson();
@@ -62,6 +66,9 @@ public class SparkWebServer {
         System.out.println("*********************************************");
         System.out.println("****  Spark server started on port " + port() + "  ****");
         System.out.println("*********************************************");
+
+        // val path = System.getProperty("user.dir")
+
 
     }
 }
