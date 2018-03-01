@@ -19,3 +19,6 @@ target/
 !.idea/codeStyleSettings.xml
 # Do not ignore shared run-debug configurations
 !.idea/runConfigurations
+
+# NodeJS stuff
+node_modules/*

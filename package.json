@@ -1,0 +1,31 @@
+{
+  "name": "casaferre",
+  "version": "1.0.0",
+  "description": "Jorgen's private testing project",
+  "main": "webpack.config.js",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^3.11.0"
+  },
+  "scripts": {
+    "ww": "webpack --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://jandery@github.com/jandery/casaferre.git"
+  },
+  "keywords": [
+    "private",
+    "testing",
+    "node",
+    "TypeScript",
+    "vue"
+  ],
+  "author": "Jörgen Andersson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jandery/casaferre/issues"
+  },
+  "homepage": "https://github.com/jandery/casaferre#readme"
+}
