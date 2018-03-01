@@ -29,7 +29,7 @@
          * @returns {string}
          */
         get computedMsg(): string {
-            return this.msg + " : This is the second vue-component, written in TypeScript!";
+            return this.msg + " : This is a Vue component in TypsScript!";
         }
     }
 </script>

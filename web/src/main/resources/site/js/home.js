@@ -11135,7 +11135,7 @@ var ExampleComponent = (function (_super) {
     };
     Object.defineProperty(ExampleComponent.prototype, "computedMsg", {
         get: function () {
-            return this.msg + " : This is the second vue-component, written in TypeScript!";
+            return this.msg + " : This is a Vue component in TypsScript!";
         },
         enumerable: true,
         configurable: true
@@ -11160,13 +11160,7 @@ var vue_1 = __webpack_require__(0);
 var ExampleComponent_vue_1 = __webpack_require__(8);
 new vue_1.default({
     el: "#vueApp",
-    template: "\n    <div>\n        <div>Hello {{name}}!</div>\n        Name: <input v-model=\"name\" type=\"text\"><br/>\n        <example-component></example-component>\n    </div>",
-    data: {
-        name: "World"
-    },
-    components: {
-        ExampleComponent: ExampleComponent_vue_1.default
-    }
+    render: function (h) { return h(ExampleComponent_vue_1.default); }
 });
 
 
