@@ -5,26 +5,11 @@
     <title>Title</title>
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
-
-    <script src="js/lib/jquery-3.2.1.js"></script>
-    <script src="js/lib/vue-2.5.3.js"></script>
-    <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
-    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
-    <!-- Vue components -->
-    <script src="js/components/bsvue-ints.js"></script>
-    <script>
-        $(document).ready(function () {
-            new Vue({
-                el: '#app'
-            });
-        });
-    </script>
 </head>
 <body>
 
-<div id="app">
-    <int-example></int-example>
-</div>
+<div id="vueApp"></div>
 
+<script src="js/home.js"></script>
 </body>
 </html>

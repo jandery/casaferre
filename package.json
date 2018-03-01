@@ -3,8 +3,15 @@
   "version": "1.0.0",
   "description": "Jorgen's private testing project",
   "main": "webpack.config.js",
-  "dependencies": {},
+  "dependencies": {
+    "vue": "^2.5.13"
+  },
   "devDependencies": {
+    "ts-loader": "3.5",
+    "ts-node": "^4.1.0",
+    "vue-class-component": "^6.2.0",
+    "vue-loader": "^14.1.1",
+    "vue-template-compiler": "^2.5.13",
     "webpack": "^3.11.0"
   },
   "scripts": {

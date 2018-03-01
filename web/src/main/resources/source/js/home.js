@@ -1,9 +1,12 @@
-/**
- * Purpose of this file is ...
- *
- * Created by Jorgen Andersson on 2018-03-01.
- */
-
-var getFullName = function(firstName, lastName) {
-    return firstName + " " + lastName;
-}
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var vue_1 = require("vue");
+new vue_1.default({
+    el: "#mainExampleComponents",
+    template: "\n    <div>\n        <div>Hello {{name}}!</div>\n        Name: <input v-model=\"name\" type=\"text\">\n    </div>",
+    data: {
+        name: "World"
+    },
+    components: {}
+});
+//# sourceMappingURL=home.js.map

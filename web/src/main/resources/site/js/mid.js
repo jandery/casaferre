@@ -60,19 +60,32 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 2:
-/***/ (function(module, exports) {
+/***/ 7:
+/***/ (function(module, exports, __webpack_require__) {
 
-/**
- * Purpose of this file is ...
- *
- * Created by Jorgen Andersson on 2018-03-01.
- */
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var Person = (function () {
+    function Person(firstName, lastName) {
+        this.fName = firstName;
+        this.lName = lastName;
+    }
+    Object.defineProperty(Person.prototype, "fullName", {
+        get: function () {
+            return "${this.fName} ${this.lName}";
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Person;
+}());
+exports.Person = Person;
 
 
 /***/ })
