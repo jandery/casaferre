@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/lib/jquery-3.2.1.js"></script>
+    <script src="js/lib/vue-2.5.3.js"></script>
+    <script>
+
+        //Vue.component("hovno", "js/components/vue-example.vue");
+
+        $(document).ready(function () {
+
+            $.ajax({
+                url: "js/components/vue-example.vue"
+            }).done(function(data) {
+                var element = document.createElement("div");
+                element.innerHTML = data;
+
+                var templates = element.getElementsByTagName("template");
+                var scripts = element.getElementsByTagName("script");
+                var styles = element.getElementsByTagName("style");
+
+            });
+
+
+            new Vue({
+                el: '#app'
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div id="app">
+    <div>Före</div>
+    <div>Efter</div>
+</div>
+
+</body>
+</html>

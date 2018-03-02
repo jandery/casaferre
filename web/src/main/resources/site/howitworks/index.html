@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+    <title>How it works - Unsigned Int</title>
+    <script src="/js/lib/vue-2.5.3.js"></script>
+    <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    <!-- Vue Components -->
+    <script src="/js/components/bsvue-ints.js"></script>
 </head>
 <body>
 
@@ -15,18 +18,19 @@
     <form>
         <div class="form-group">
             <label for="rangeInput">Värde</label>
-            <input type="range" min="0" max="100000" step="10" class="form-control" id="rangeInput" placeholder="name@example.com">
+            <input type="range" min="0" max="255" step="1" class="form-control" id="rangeInput" v-model.number="intValue">
         </div>
     </form>
+    <int-example :value="intValue"></int-example>
 </div>
 
-<table id="example">
-    <tbody>
-        <tr></tr>
-        <tr></tr>
-    </tbody>
-</table>
-
-<script src="../js/jorgen.js"></script>
+<script>
+    new Vue({
+        el: "#vueApp",
+        data: {
+            intValue: 0
+        }
+    });
+</script>
 </body>
 </html>

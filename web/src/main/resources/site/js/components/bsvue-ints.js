@@ -4,8 +4,11 @@
 
 Vue.component('int-example', {
     template: '<b-container>' +
-    '<b-row class="text-center"><b-col cols="2">&nbsp;</b-col><b-col v-for="item in items">{{ base }}<sup>{{ item }}</sup></b-col><b-col cols="2">&nbsp;</b-col></b-row>' +
-    '<b-row class="text-center"><b-col cols="2">&nbsp;</b-col><b-col v-for="item in items">{{ Math.pow(base, item) }}</b-col><b-col cols="2">&nbsp;</b-col></b-row>' +
+    '<b-row class="text-center"><b-col cols="12">{{ value }}</b-col></b-row>' +
+    '<b-row class="text-center"><b-col cols="2">&nbsp;</b-col><b-col v-for="item in items" :key="item">{{ value & Math.pow(base, item) ? 1 : 0 }}</b-col><b-col cols="2">&nbsp;</b-col></b-row>' +
+    '<b-row class="text-center"><b-col cols="2">&nbsp;</b-col><b-col v-for="item in items" :key="item">{{ base }}<sup>{{ item }}</sup></b-col><b-col cols="2">&nbsp;</b-col></b-row>' +
+    '<b-row class="text-center"><b-col cols="2">&nbsp;</b-col><b-col v-for="item in items" :key="item">{{ Math.pow(base, item) }}</b-col><b-col cols="2">&nbsp;</b-col></b-row>' +
+    '<b-row class="text-center"><b-col cols="2">&nbsp;</b-col><b-col v-for="item in items" :key="item">{{ value & Math.pow(base, item) }}</b-col><b-col cols="2">&nbsp;</b-col></b-row>' +
     '</b-container>',
     props: {
         value: {
