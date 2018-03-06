@@ -1,12 +1,24 @@
 {
   "name": "casaferre",
   "version": "1.0.0",
+  "author": "Jörgen Andersson",
   "description": "Jorgen's private testing project",
+  "homepage": "https://github.com/jandery/casaferre#readme",
+  "keywords": [
+    "private",
+    "testing",
+    "node",
+    "TypeScript",
+    "vue"
+  ],
+  "license": "ISC",
   "main": "webpack.config.js",
   "dependencies": {
-    "vue": "^2.5.13"
+    "vue": "^2.5.13",
+    "vue-router": "^2.7.0"
   },
   "devDependencies": {
+    "css-loader": "^0.28.10",
     "ts-loader": "3.5",
     "ts-node": "^4.1.0",
     "vue-class-component": "^6.2.0",
@@ -22,17 +34,7 @@
     "type": "git",
     "url": "git+https://jandery@github.com/jandery/casaferre.git"
   },
-  "keywords": [
-    "private",
-    "testing",
-    "node",
-    "TypeScript",
-    "vue"
-  ],
-  "author": "Jörgen Andersson",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/jandery/casaferre/issues"
-  },
-  "homepage": "https://github.com/jandery/casaferre#readme"
+  }
 }
