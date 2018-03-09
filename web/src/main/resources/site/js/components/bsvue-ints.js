@@ -13,7 +13,7 @@ Vue.component('int-example', {
     props: {
         value: {
             type: Number,
-            default: 0
+            default: 125
         }
     },
     data: function () {

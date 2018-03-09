@@ -8,12 +8,13 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Purpose of this class ...
+ * Purpose of this class is reading properties
  * <p>
  * Created by Jorgen Andersson (jorgen@kollektiva.se) on 2018-02-13.
  */
 public enum ConfigVariable {
-    PORT("PORT");
+    PORT("PORT"),
+    ENVIRONMENT("ENVIRONMENT");
 
     static Map<String, String> mEnvironmentVariables = System.getenv();
     static Map<String, String> mPropertiesFileValues = readProperties();
@@ -29,6 +30,11 @@ public enum ConfigVariable {
         return mEnvironmentVariables.containsValue(variable.mKey) ?
                 mEnvironmentVariables.get(variable.mKey) :
                 mPropertiesFileValues.get(variable.mKey);
+    }
+
+
+    public boolean valueEquals(String compareValue) {
+        return getValue(this).equals(compareValue);
     }
 
 
@@ -48,6 +54,8 @@ public enum ConfigVariable {
                                 map.put(split[0], split[1].trim());
                             }
                         });
+            } else {
+                System.out.println("File does not exists");
             }
         }catch (IOException e) {
 

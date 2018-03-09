@@ -6,9 +6,7 @@ module.exports = {
     entry: {
         index: './web/src/main/resources/source/js/index.js',
         home: './web/src/main/resources/source/js/home.ts',
-        mid: './web/src/main/resources/source/js/mid.ts',
-        how: './web/src/main/resources/source/js/how.ts',
-        hovno: './web/src/main/resources/source/js/hovno.js',
+        mid: './web/src/main/resources/source/js/mid.ts'
     },
     output: {
         path: path.resolve(__dirname, 'web/src/main/resources/site/js'),

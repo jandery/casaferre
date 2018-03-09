@@ -19,11 +19,16 @@ import static spark.Spark.*;
 public class SparkWebServer {
 
     public static void main(String[] args) {
-        val currentPath = Paths.get("").toAbsolutePath().toString();
-
-        //
+        // Set port for WebServer
         port(Integer.parseInt(ConfigVariable.getValue(ConfigVariable.PORT)));
-        staticFiles.location("/site");
+        // Set location for static files, set resource folder for dev to avoid re-starting server during development
+        if (ConfigVariable.getValue(ConfigVariable.ENVIRONMENT).equals("dev")) {
+            val projectDir = System.getProperty("user.dir");
+            val staticDir = "/web/src/main/resources/site";
+            staticFiles.externalLocation(projectDir + staticDir);
+        } else {
+            staticFiles.location("/site");
+        }
         //
         path("/api", () -> {
             Gson gson = new Gson();
@@ -66,9 +71,6 @@ public class SparkWebServer {
         System.out.println("*********************************************");
         System.out.println("****  Spark server started on port " + port() + "  ****");
         System.out.println("*********************************************");
-
-        // val path = System.getProperty("user.dir")
-
 
     }
 }

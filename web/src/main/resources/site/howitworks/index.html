@@ -9,14 +9,60 @@
     <!-- JavaScript library -->
     <script type="text/javascript" src="//unpkg.com/jquery@3.2.1/dist/jquery.js"></script>
     <script type="text/javascript" src="//unpkg.com/vue@2.5.13/dist/vue.js"></script>
+    <script type="text/javascript" src="//unpkg.com/vue-router@2.5.3/dist/vue-router.js"></script>
     <!-- Bootstrap Vue JavaScript -->
     <script type="text/javascript" src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
     <script type="text/javascript" src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    <!-- Vue components -->
+    <script type="text/javascript" src="/js/components/bsvue-home.js"></script>
+    <script type="text/javascript" src="/js/components/bsvue-ints.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+
+            var mVue = new Vue({
+                el: "#app",
+                router: new VueRouter({
+                    mode: 'hash',
+                    routes: [
+                        {path: '/', component: Vue.component('home')},
+                        {path: '/int', component: Vue.component('int-example')}
+                    ]
+                }),
+                data: function() {
+                    return {
+                        navigation: [
+                            {key: '/', text: 'Hem'},
+                            {key: '/int', text: 'Heltal'}
+                        ]
+                    };
+                },
+                mounted: function() {},
+                created: function() {},
+                methods: {}
+            });
+        });
+
+
+    </script>
 </head>
 <body>
 
-<div id="app"></div>
+<div id="app">
+    <b-navbar toggleable="md" type="dark" variant="info">
+        <b-navbar-nav>
+            <b-nav-item v-for="item in navigation" :to="item.key">{{ item.text }}</b-nav-item>
+        </b-navbar-nav>
+    </b-navbar>
 
-<script src="../js/hovno.js"></script>
+    <div class="container">
+        <div class="row">
+            <div class="col-md9 col-xs-12 col-sm-12">
+                <router-view class="view"></router-view>
+            </div>
+            <div class="col-md3"></div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
