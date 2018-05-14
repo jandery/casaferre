@@ -37,7 +37,7 @@ public class Example {
         System.out.println(distanceFlat(mNewYork, mSydney));
 
 
-        /*
+
         System.out.println("Up North 10 deg Lat change");
         System.out.println(distanceWithEarth(new Geolocation(80.0,60.0), new Geolocation(90.0,60.0)));
         System.out.println(distanceFlat(new Geolocation(80.0,60.0), new Geolocation(90.0,60.0)));
@@ -51,7 +51,6 @@ public class Example {
         System.out.println("Equator 10 deg Long change");
         System.out.println(distanceWithEarth(new Geolocation(10.0,60.0), new Geolocation(10.0,70.0)));
         System.out.println(distanceFlat(new Geolocation(10.0,60.0), new Geolocation(10.0,70.0)));
-        */
 
     }
 
