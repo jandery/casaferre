@@ -14,16 +14,31 @@
         <module>common</module>
         <module>web</module>
         <module>config</module>
+        <module>blockChain</module>
+        <module>encrypt</module>
+        <module>data</module>
+        <module>webServer</module>
     </modules>
 
 
     <properties>
+        <kmongo.version>3.6.3</kmongo.version>
+        <kotlin.version>1.2.50</kotlin.version>
         <lombok.version>1.16.18</lombok.version>
         <spark.version>2.7.1</spark.version>
         <gson.version>2.8.2</gson.version>
         <junit.version>4.12</junit.version>
         <assertj.version>3.8.0</assertj.version>
+        <schinzel.version>1.31</schinzel.version>
+        <spark.version>1.0.0-alpha</spark.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>maven-repo.schinzel.io</id>
+            <url>http://maven-repo.schinzel.io/release</url>
+        </repository>
+    </repositories>
 
 
     <dependencies>

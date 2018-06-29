@@ -6,16 +6,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="blockChain" />
         <module name="common" />
         <module name="config" />
+        <module name="data" />
+        <module name="encrypt" />
         <module name="web" />
+        <module name="webServer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
+      <module name="blockChain" target="1.8" />
       <module name="casaferre" target="1.8" />
       <module name="common" target="1.8" />
       <module name="config" target="1.8" />
+      <module name="data" target="1.8" />
+      <module name="encrypt" target="1.8" />
       <module name="web" target="1.8" />
+      <module name="webServer" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

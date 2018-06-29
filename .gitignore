@@ -1,14 +1,13 @@
 
-*.class
-
-# Package Files #
-*.jar
-
-# OS X system file
+##### OS X system file ######
 .DS_Store
 
-# virtual machine crash logs
+##### virtual machine crash logs ######
 hs_err_pid*
+
+##### Package/Build stuff ######
+*.class
+*.jar
 target/
 
 ##### IntelliJ files ######
@@ -20,5 +19,5 @@ target/
 # Do not ignore shared run-debug configurations
 !.idea/runConfigurations
 
-# NodeJS / npm downloads
+##### node JS stuff ######
 node_modules
