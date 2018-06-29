@@ -1,9 +1,3 @@
-This project is for my own testing purpose.
+#CasaFerre 
 
-From console:
-
-npm install
-to install node depenencies
-
-npm run ww
-to watch changes (and build bundled JavaScript)
+This project is for testing purpose only.
