@@ -3,18 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        circle {
+            fill: #ddd;
+            stroke: #0074d9;
+            stroke-width: 50;
+            stroke-dasharray: 0 158;
+            transition: stroke-dasharray .3s ease;
+        }
+
+        svg {
+            margin: 0 auto;
+            transform: rotate(-90deg);
+            background: #ddd;
+            border-radius: 50%;
+            display: block;
+        }
+    </style>
     <script type="text/javascript" src="../js/libs/jquery-3.3.1.min.js"></script>
 
     <script type="text/javascript">
 
-        /*
-         * Event objects: https://www.w3schools.com/jsref/obj_events.asp
-         *
-         * var event = document.createEvent('MouseEvent');
-         * or
-         * var event = new MouseEvent("click", { bubbles: true, cancelable: true, view: window });
-         *
-         */
+        class SwipeComponent {
+
+            constructor(element) {
+                this.startX = 0;
+                this.startY = 0;
+                this.endX = 0;
+                this.endY = 0;
+
+                element.addEventListener(
+                    'touchstart',
+                    (event) => {
+                        this.startX = event.touches[0].clientX;
+                        this.startY = event.touches[0].clientY;
+                    },
+                    false);
+                element.addEventListener(
+                    'touchmove',
+                    (event) => {
+                        console.log("moving " + event.changedTouches[0].clientX + ":" + event.changedTouches[0].clientY);
+                    },
+                    false);
+                element.addEventListener(
+                    'touchend',
+                    (event) => {
+                        this.endX = event.changedTouches[0].clientX;
+                        this.endY = event.changedTouches[0].clientY;
+                    },
+                    false);
+            }
+        }
 
 
         const appendToLog = (msg) => {
@@ -22,10 +61,31 @@
         };
 
         const tourchEvents = (element) => {
-            element.addEventListener('touchstart', (event) => {console.log("ts");}, false);
-            element.addEventListener('touchmove', (event) => {console.log("tm");}, false);
+            element.addEventListener(
+                'touchstart',
+                (event) => {
+                    console.log("start tourches length: " + event.touches.length);
+                    console.log("start changedtourches length: " + event.changedTouches.length);
+                    console.log("start Client X: " + event.touches[0].clientX);
+                    console.log("start Client Y: " + event.touches[0].clientY);
+                    },
+                false);
+            element.addEventListener(
+                'touchmove',
+                (event) => {
+                    console.log(event.touches[0].clientX + " - " + event.changedTouches[0].clientX);
+                    },
+                false);
             element.addEventListener('touchcancel', (event) => {console.log("tc");}, false);
-            element.addEventListener('touchend', (event) => {console.log("te");}, false);
+            element.addEventListener(
+                'touchend',
+                (event) => {
+                    console.log("end tourches length: " + event.touches.length);
+                    console.log("end changedtourches length: " + event.changedTouches.length);
+                    console.log("end Client X: " + event.changedTouches[0].clientX);
+                    console.log("end Client Y: " + event.changedTouches[0].clientY);
+                    },
+                false);
         };
 
         const customEventExample = () => {
@@ -36,7 +96,9 @@
 
         $(document).ready(function () {
 //            simulateEvent(document.getElementById("myElement"));
-            tourchEvents(document.getElementById("meAvatar"));
+//            tourchEvents(document.getElementById("meAvatar"));
+
+            let tada = new SwipeComponent(document.getElementById("meAvatar"))
         });
 
     </script>

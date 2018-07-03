@@ -1,48 +1,91 @@
-Vue.component('pie-chart', {
-    template: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 2 2" style="transform: rotate(-0.25turn)">' +
-    '<path v-for="(item, index) in values" v-bind:d="d[index]" v-bind:fill="colors[index] />' +
+/**
+ * Single value pie-chart
+ */
+Vue.component('casaferre-simple-pie', {
+    template: '<svg viewBox="0 0 32 32" v-bind:style="{width: sizePx + \'px\', height: sizePx + \'px\'}" style="transform: rotate(-90deg); border-radius: 50%;">' +
+    '<circle r="16" cx="16" cy="16" v-bind:fill="backgroundColor" v-bind:stroke="strokeColor" style="stroke-width: 32;" v-bind:stroke-dasharray="strokeDashArray" />' +
     '</svg>',
     props: {
-        values: Array
+        /**
+         * Width and Hight of image in px
+         */
+        sizePx: { type: Number, default: 100 },
+        /**
+         * Integer value in percent
+         */
+        value: { type: Number, required: true },
+        /*
+         * Background color, for pie
+         */
+        backgroundColor: { type: String, default: '#ddd' },
+        /*
+         * Color for the value part of pie
+         */
+        strokeColor: { type: String, default: '#888' }
     },
-    data: function () {
-        return {
-            colors: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff", "#f00000", "#00f0000", "#0000f0", "#f0f000", "#f000f0", "#00f0f0"]
-        };
+    computed: {
+        strokeDashArray: function() { return this.value + " 100"; }
+    }
+});
+
+
+/**
+ * Multiple value pie-chart
+ */
+Vue.component('casaferre-pie', {
+    template: '<svg v-bind:style="{width: sizePx + \'px\', height: sizePx + \'px\'}" viewBox="-1 -1 2 2" style="transform: rotate(-0.25turn)">' +
+    '<path v-for="(item, index) in values" v-bind:d="d[index]" v-bind:fill="colors[index]"/>' +
+    '</svg>',
+    props: {
+        sizePx: { type: Number, default: 100 },
+        /**
+         * Array of Number
+         * Ex: [10, 20, 30, 40]
+         */
+        values: { type: Array, required: true },
+        /**
+         * If total is not the sum of all values
+         * but pie should only cover fx. 90 %
+         */
+        totalSum: Number,
+        /**
+         * Array of String representing HTML colors
+         * Ex: ['#aaa', '#888', #555', '#222']
+         */
+        colors: { type: Array, required: true }
     },
     computed: {
         /**
-         * Calculate sum of values
-         * @return {*}
+         * Calculate the sum of all values.
+         * Return the higher value of inparam total and the sum
          */
         sum: function() {
-            return this.values.reduce(function(total, currentValue) {return total + currentValue;});
+            if (this.totalSum) {
+                return this.totalSum;
+            }
+            return this.values.reduce(function(a,b){ return a+b; }, 0);
         },
+        /**
+         * Calculate list of Pie pieces
+         */
         d: function() {
-            var vueData = this.$data;
-            var accumulatedPercent = 0;
-            var arrayOfPaths = [];
-            var total = this.sum;
-            // Center of graph
-            var centerPoint = "L 0 0";
+            let accumulatedPercent = 0;
+            let total = this.sum;
 
             // Function to calculate a coordinate point on graph to draw an arc to
-            var getCoordinates = function(percent) {
-                var x = Math.cos(2 * Math.PI * percent);
-                var y = Math.sin(2 * Math.PI * percent);
+            const getCoordinates = function(percent) {
+                let x = Math.cos(2 * Math.PI * percent);
+                let y = Math.sin(2 * Math.PI * percent);
                 return x + " " + y;
-            }
+            };
 
-            $.each(this.values, function(index, value) {
-                var start = getCoordinates(accumulatedPercent);
+            return $.map(this.values, function(value) {
+                let start = getCoordinates(accumulatedPercent);
                 accumulatedPercent += value / total;
-                var end = getCoordinates(accumulatedPercent);
-                var largeArcFlag = value / total > .5 ? 1 : 0;
-                arrayOfPaths.push("M " + start + " A 1 1 0 " + largeArcFlag + " 1 " + end + " " + centerPoint);
+                let end = getCoordinates(accumulatedPercent);
+                let largeArcFlag = value / total > .5 ? 1 : 0;
+                return "M " + start + " A 1 1 0 " + largeArcFlag + " 1 " + end + " L 0 0";
             });
-
-            return arrayOfPaths;
         }
-    },
-    methods: {}
+    }
 });
