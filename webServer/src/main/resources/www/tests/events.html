@@ -16,24 +16,39 @@
          *
          */
 
-        function simulateEvent(element) {
-            // Create event
-            var event = document.createEvent('MouseEvent');
-            // init mouse event
-            event.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-            // Fire Event
-            var dispatch = element.dispatchEvent(event);
-            console.log(dispatch);
-        }
 
-        $(document).ready(function() {
-            simulateEvent(document.getElementById("myElement"));
+        const appendToLog = (msg) => {
+            $("#log").append(`<div>${msg}</div>`);
+        };
+
+        const tourchEvents = (element) => {
+            element.addEventListener('touchstart', (event) => {console.log("ts");}, false);
+            element.addEventListener('touchmove', (event) => {console.log("tm");}, false);
+            element.addEventListener('touchcancel', (event) => {console.log("tc");}, false);
+            element.addEventListener('touchend', (event) => {console.log("te");}, false);
+        };
+
+        const customEventExample = () => {
+            document.body.addEventListener("myEventName", (e) => {console.log(e);}, false);
+            var myEvent = new CustomEvent("myEventName", { detail: { key1: "value1", key2: "value2" } });
+            document.body.dispatchEvent(myEvent);
+        };
+
+        $(document).ready(function () {
+//            simulateEvent(document.getElementById("myElement"));
+            tourchEvents(document.getElementById("meAvatar"));
         });
+
     </script>
 </head>
 <body>
 
 <div id="myElement">TADA</div>
+
+<img id="meAvatar" src="../imgs/me.png" style="width: 200px; height: 200px; border-radius: 50%;" alt="Avatar">
+
+<h3>Log</h3>
+<div id="log"></div>
 
 </body>
 </html>
