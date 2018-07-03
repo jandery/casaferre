@@ -19,10 +19,22 @@
             <artifactId>spark-kotlin</artifactId>
             <version>${spark.version}</version>
         </dependency>
+        <!-- HTML template engine for Spark WebServer -->
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20160810</version>
+            <groupId>com.sparkjava</groupId>
+            <artifactId>spark-template-freemarker</artifactId>
+            <version>${spark.template.version}</version>
+        </dependency>
+        <!-- Mapper for turning Data objects into Database objects. Jackson used by KMongo (see data project) and therefore used here too -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>io.schinzel</groupId>

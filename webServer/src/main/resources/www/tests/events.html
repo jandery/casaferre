@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/libs/jquery-3.3.1.min.js"></script>
+
+    <script type="text/javascript">
+
+        /*
+         * Event objects: https://www.w3schools.com/jsref/obj_events.asp
+         *
+         * var event = document.createEvent('MouseEvent');
+         * or
+         * var event = new MouseEvent("click", { bubbles: true, cancelable: true, view: window });
+         *
+         */
+
+        function simulateEvent(element) {
+            // Create event
+            var event = document.createEvent('MouseEvent');
+            // init mouse event
+            event.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            // Fire Event
+            var dispatch = element.dispatchEvent(event);
+            console.log(dispatch);
+        }
+
+        $(document).ready(function() {
+            simulateEvent(document.getElementById("myElement"));
+        });
+    </script>
+</head>
+<body>
+
+<div id="myElement">TADA</div>
+
+</body>
+</html>

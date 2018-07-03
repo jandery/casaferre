@@ -14,11 +14,15 @@ fun main(args: Array<String>) {
 
     val config : IConfigVar = ConfigVar.create(".env")
     val port = Integer.parseInt(config.getValue("PORT"))
+    val environment = config.getValue("ENVIRONMENT")
     val filesLocation = "/www"
 
     MongoConnection.setConnection(config.getValue("MONGOHQ_URL"))
 
-    WebServer(port = port, filesLocation = filesLocation)
+    WebServer(
+            port = port,
+            environment = environment,
+            filesLocation = filesLocation)
 
     println("************************************************")
     println("*****  Spark server started on port $port  ******")

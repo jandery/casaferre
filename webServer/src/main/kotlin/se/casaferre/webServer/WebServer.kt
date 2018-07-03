@@ -1,5 +1,6 @@
 package se.casaferre.webServer
 
+import se.casaferre.webServer.controllers.FreemarkerController
 import spark.Spark
 import spark.Redirect.Status
 
@@ -8,15 +9,23 @@ import spark.Redirect.Status
  *
  * Created by Jorgen Andersson on 2018-06-29.
  */
-class WebServer(port: Int, filesLocation: String) {
+class WebServer(port: Int, environment: String, filesLocation: String) {
 
     init {
-
         // Settings
         Spark.port(port)
 
         // File Server
-        Spark.staticFiles.location(filesLocation)
+        if (environment == "dev") {
+            val projectDir = System.getProperty("user.dir")
+            val staticDir = "/webServer/src/main/resources/www"
+            Spark.staticFiles.externalLocation(projectDir + staticDir)
+        } else {
+            Spark.staticFiles.location(filesLocation)
+        }
+
+        // Template server
+        FreemarkerController("/")
 
         // API server
         Spark.get("/hello") { _, _ -> "Hello World" }
