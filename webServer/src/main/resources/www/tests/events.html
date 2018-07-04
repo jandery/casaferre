@@ -30,8 +30,7 @@
             constructor(element, options) {
 
                 this.settings = $.extend({
-                    debug: false,
-                    rotateImage: true,
+                    rotate: true,
                     move: totalDegree => {},
                     done: totalDegree => {}}, options );
 
@@ -92,7 +91,7 @@
             }
 
             rotateElement(element, degree) {
-                if (this.settings.rotateImage) {
+                if (this.settings.rotate) {
                     element.style.transform = 'rotate(' +degree + 'deg)';
                 }
             }
@@ -110,16 +109,13 @@
         };
 
         $(document).ready(function () {
-//            simulateEvent(document.getElementById("myElement"));
-//            tourchEvents(document.getElementById("meAvatar"));
-
-            let tada = new TouchSliderRound(
+            let slider = new TouchSliderRound(
                 document.getElementById("meAvatar"),
                 {
-                    move: degree => { $("#log").text(degree + " grader"); }
+                    rotate: true,
+                    move: degree => { $("#log").text("Current slide at: " + degree + " degr"); },
+                    done: degree => { $("#log").text("Stopped at: " + degree + " degr"); }
                 });
-
-
         });
 
     </script>
