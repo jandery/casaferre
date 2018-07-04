@@ -3,6 +3,7 @@ package se.casaferre.webServer
 import se.casaferre.webServer.controllers.FreemarkerController
 import spark.Spark
 import spark.Redirect.Status
+import spark.Response
 
 /**
  * Purpose of this file is ...
@@ -32,6 +33,9 @@ class WebServer(port: Int, environment: String, filesLocation: String) {
 
         // Shortcuts
         Spark.redirect.get("/mid99", "https://boiling-torch-802.firebaseapp.com/", Status.TEMPORARY_REDIRECT);
+
+        // GZIP Everything
+        Spark.after("/*") { _, response: Response -> response.header("Content-Encoding", "gzip") }
 
         // Init/Start server
         Spark.init()
