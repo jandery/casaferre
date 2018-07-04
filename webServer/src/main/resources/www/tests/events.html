@@ -27,65 +27,61 @@
         class SwipeComponent {
 
             constructor(element) {
-                this.startX = 0;
-                this.startY = 0;
-                this.endX = 0;
-                this.endY = 0;
+
+                this.centerX = element.offsetWidth / 2;
+                this.centerY = element.offsetHeight / 2;
+
+                this.startDegree = null;
+                this.endDegree = null;
+                this.previousDegree = null;
+                this.laps = 0;
 
                 element.addEventListener(
                     'touchstart',
                     (event) => {
-                        this.startX = event.touches[0].clientX;
-                        this.startY = event.touches[0].clientY;
+                        this.laps = 0;
+                        this.endDegree = null;
+                        this.startDegree = this.calcDegree(event.touches[0].clientX, event.touches[0].clientY);
                     },
                     false);
                 element.addEventListener(
                     'touchmove',
                     (event) => {
-                        console.log("moving " + event.changedTouches[0].clientX + ":" + event.changedTouches[0].clientY);
+                        let currentDegree = this.calcDegree(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+                        if (this.previousDegree) {
+                            if (this.previousDegree > 350 && currentDegree < 10) {
+                                this.laps++;
+                            } else if(this.previousDegree < 10 && currentDegree > 350) {
+                                this.laps--;
+                            }
+                            element.style.transform = 'rotate(' + this.calcMove(currentDegree) + 'deg)';
+                        }
+
+                        this.previousDegree = currentDegree;
                     },
                     false);
                 element.addEventListener(
                     'touchend',
                     (event) => {
-                        this.endX = event.changedTouches[0].clientX;
-                        this.endY = event.changedTouches[0].clientY;
+                        this.endDegree = this.calcDegree(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+                        console.log("Move " + this.calcMove(this.endDegree));
                     },
                     false);
+            }
+
+            calcDegree(pointX, pointY) {
+                let degree = Math.atan2(pointY - this.centerY, pointX - this.centerX) * 180 / Math.PI;
+                return degree >= 0 ? degree : 360 + degree;
+            }
+
+            calcMove(degree) {
+                return (this.laps * 360) + (degree - this.startDegree);
             }
         }
 
 
         const appendToLog = (msg) => {
             $("#log").append(`<div>${msg}</div>`);
-        };
-
-        const tourchEvents = (element) => {
-            element.addEventListener(
-                'touchstart',
-                (event) => {
-                    console.log("start tourches length: " + event.touches.length);
-                    console.log("start changedtourches length: " + event.changedTouches.length);
-                    console.log("start Client X: " + event.touches[0].clientX);
-                    console.log("start Client Y: " + event.touches[0].clientY);
-                    },
-                false);
-            element.addEventListener(
-                'touchmove',
-                (event) => {
-                    console.log(event.touches[0].clientX + " - " + event.changedTouches[0].clientX);
-                    },
-                false);
-            element.addEventListener('touchcancel', (event) => {console.log("tc");}, false);
-            element.addEventListener(
-                'touchend',
-                (event) => {
-                    console.log("end tourches length: " + event.touches.length);
-                    console.log("end changedtourches length: " + event.changedTouches.length);
-                    console.log("end Client X: " + event.changedTouches[0].clientX);
-                    console.log("end Client Y: " + event.changedTouches[0].clientY);
-                    },
-                false);
         };
 
         const customEventExample = () => {
@@ -107,7 +103,7 @@
 
 <div id="myElement">TADA</div>
 
-<img id="meAvatar" src="../imgs/me.png" style="width: 200px; height: 200px; border-radius: 50%;" alt="Avatar">
+<img id="meAvatar" src="../imgs/me.png" style="width: 400px; height: 400px; border-radius: 50%;" alt="Avatar">
 
 <h3>Log</h3>
 <div id="log"></div>

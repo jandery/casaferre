@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+    <title>Components</title>
+    <style>
+        body {
+            font-family: "Roboto Condensed", "Lucida Grande", sans-serif;
+        }
+        div.frame {
+            padding: 20px; margin-top: 20px; border: 1px solid green;
+            max-width: 600px;
+        }
+    </style>
+    <!-- JavaScript library -->
+    <script type="text/javascript" src="//unpkg.com/jquery@3.2.1/dist/jquery.js"></script>
+    <script type="text/javascript" src="//unpkg.com/vue@2.3.2/dist/vue.js"></script>
+    <!-- Vue Components -->
+    <script type="text/javascript" src="../js/components/pie.js"></script>
+
+
+    <script type="text/javascript">
+
+        jQuery(document).ready(function () {
+            var mVue = new Vue({
+                el: "#app",
+                data: {
+                    pieData: [200, 400, 100, 300],
+                    barData: [600,500,100,200,400,300],
+                    colors: ['#F48D5A','#B6C967','#5EA1C2','#EFD259','#E85D42','#AC83C8','#B78C69','#F4F0EA','#005176'],
+                    singleColor: '#F48D5A'
+                }
+            });
+        });
+
+    </script>
+</head>
+<body>
+
+<div id="app">
+
+    <div class="frame">
+        <casaferre-simple-pie :value="22"></casaferre-simple-pie>
+        <casaferre-simple-pie :size-px="200" :value="22" :background-color="colors[0]" :stroke-color="colors[1]"></casaferre-simple-pie>
+    </div>
+
+    <div class="frame">
+        <casaferre-pie :size-px="100" :values="pieData" :colors="colors"></casaferre-pie>
+        <casaferre-pie :size-px="200" :values="pieData" :colors="colors" :total-sum="1200"></casaferre-pie>
+    </div>
+
+</div>
+
+</body>
+</html>
