@@ -24,9 +24,16 @@
 
     <script type="text/javascript">
 
-        class SwipeComponent {
 
-            constructor(element) {
+        class TouchSliderRound {
+
+            constructor(element, options) {
+
+                this.settings = $.extend({
+                    debug: false,
+                    rotateImage: true,
+                    move: totalDegree => {},
+                    done: totalDegree => {}}, options );
 
                 this.centerX = element.offsetWidth / 2;
                 this.centerY = element.offsetHeight / 2;
@@ -38,7 +45,7 @@
 
                 element.addEventListener(
                     'touchstart',
-                    (event) => {
+                    event => {
                         this.laps = 0;
                         this.endDegree = null;
                         this.startDegree = this.calcDegree(event.touches[0].clientX, event.touches[0].clientY);
@@ -46,25 +53,21 @@
                     false);
                 element.addEventListener(
                     'touchmove',
-                    (event) => {
+                    event => {
                         let currentDegree = this.calcDegree(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
-                        if (this.previousDegree) {
-                            if (this.previousDegree > 350 && currentDegree < 10) {
-                                this.laps++;
-                            } else if(this.previousDegree < 10 && currentDegree > 350) {
-                                this.laps--;
-                            }
-                            element.style.transform = 'rotate(' + this.calcMove(currentDegree) + 'deg)';
-                        }
-
+                        this.calculateLaps(currentDegree);
+                        let totalMoveDegree = this.calcMove(currentDegree);
+                        this.rotateElement(element, totalMoveDegree);
+                        this.settings.move(totalMoveDegree);
                         this.previousDegree = currentDegree;
                     },
                     false);
                 element.addEventListener(
                     'touchend',
-                    (event) => {
+                    event => {
                         this.endDegree = this.calcDegree(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
-                        console.log("Move " + this.calcMove(this.endDegree));
+                        let totalMoveDegree = this.calcMove(this.endDegree);
+                        this.settings.done(totalMoveDegree);
                     },
                     false);
             }
@@ -76,6 +79,22 @@
 
             calcMove(degree) {
                 return (this.laps * 360) + (degree - this.startDegree);
+            }
+
+            calculateLaps(degree) {
+                if (this.previousDegree) {
+                    if (this.previousDegree > 350 && degree < 10) {
+                        this.laps++;
+                    } else if(this.previousDegree < 10 && degree > 350) {
+                        this.laps--;
+                    }
+                }
+            }
+
+            rotateElement(element, degree) {
+                if (this.settings.rotateImage) {
+                    element.style.transform = 'rotate(' +degree + 'deg)';
+                }
             }
         }
 
@@ -94,14 +113,18 @@
 //            simulateEvent(document.getElementById("myElement"));
 //            tourchEvents(document.getElementById("meAvatar"));
 
-            let tada = new SwipeComponent(document.getElementById("meAvatar"))
+            let tada = new TouchSliderRound(
+                document.getElementById("meAvatar"),
+                {
+                    move: degree => { $("#log").text(degree + " grader"); }
+                });
+
+
         });
 
     </script>
 </head>
 <body>
-
-<div id="myElement">TADA</div>
 
 <img id="meAvatar" src="../imgs/me.png" style="width: 400px; height: 400px; border-radius: 50%;" alt="Avatar">
 
