@@ -1,6 +1,8 @@
 package se.casaferre.webServer
 
+import se.casaferre.data.services.MonitorService
 import se.casaferre.webServer.controllers.FreemarkerController
+import se.casaferre.webServer.controllers.MonitorController
 import spark.Spark
 import spark.Redirect.Status
 import spark.Response
@@ -30,6 +32,9 @@ class WebServer(port: Int, environment: String, filesLocation: String) {
 
         // API server
         Spark.get("/hello") { _, _ -> "Hello World" }
+        Spark.path("/v1") {
+            MonitorController(MonitorService())
+        }
 
         // Shortcuts
         Spark.redirect.get("/mid99", "https://boiling-torch-802.firebaseapp.com/", Status.TEMPORARY_REDIRECT);
