@@ -19,6 +19,7 @@
     <script type="text/javascript" src="//unpkg.com/vue@2.3.2/dist/vue.js"></script>
     <!-- Vue Components -->
     <script type="text/javascript" src="../js/components/pie.js"></script>
+    <script type="text/javascript" src="../js/components/sliderRound.js"></script>
 
 
     <script type="text/javascript">
@@ -49,6 +50,10 @@
     <div class="frame">
         <casaferre-pie :size-px="100" :values="pieData" :colors="colors"></casaferre-pie>
         <casaferre-pie :size-px="200" :values="pieData" :colors="colors" :total-sum="1200"></casaferre-pie>
+    </div>
+
+    <div class="frame">
+        <casaferre-slider-round :size-px="200" image-path="../imgs/me.png"></casaferre-slider-round>
     </div>
 
 </div>
