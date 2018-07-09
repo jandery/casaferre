@@ -30,7 +30,7 @@
         <junit.version>4.12</junit.version>
         <assertj.version>3.8.0</assertj.version>
         <schinzel.version>1.31</schinzel.version>
-        <spark.version>1.0.0-alpha</spark.version>
+        <spark.version>2.7.2</spark.version>
         <spark.template.version>2.7.1</spark.template.version>
         <spark.test.version>1.1.6</spark.test.version>
     </properties>

@@ -13,13 +13,13 @@
     <artifactId>webServer</artifactId>
 
     <dependencies>
-        <!-- INTERNAL -->
+        <!-- EXTERNAL -->
+        <!-- HTML template engine for Spark WebServer -->
         <dependency>
             <groupId>com.sparkjava</groupId>
-            <artifactId>spark-kotlin</artifactId>
+            <artifactId>spark-core</artifactId>
             <version>${spark.version}</version>
         </dependency>
-        <!-- HTML template engine for Spark WebServer -->
         <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-template-freemarker</artifactId>
