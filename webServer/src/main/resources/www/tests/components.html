@@ -27,11 +27,21 @@
         jQuery(document).ready(function () {
             var mVue = new Vue({
                 el: "#app",
-                data: {
-                    pieData: [200, 400, 100, 300],
-                    barData: [600,500,100,200,400,300],
-                    colors: ['#F48D5A','#B6C967','#5EA1C2','#EFD259','#E85D42','#AC83C8','#B78C69','#F4F0EA','#005176'],
-                    singleColor: '#F48D5A'
+                data() {
+                    return {
+                        pieData: [200, 400, 100, 300],
+                        barData: [600, 500, 100, 200, 400, 300],
+                        colors: ['#F48D5A', '#B6C967', '#5EA1C2', '#EFD259', '#E85D42', '#AC83C8', '#B78C69', '#F4F0EA', '#005176'],
+                        singleColor: '#F48D5A'
+                    }
+                },
+                methods: {
+                    onRotateMove(value) {
+                        $("#sliderValue").text(value + " degr");
+                    },
+                    onRotateDone(value) {
+                        $("#sliderValue").text("Stopped at " + value + " degr");
+                    }
                 }
             });
         });
@@ -53,7 +63,9 @@
     </div>
 
     <div class="frame">
-        <casaferre-slider-round :size-px="200" image-path="../imgs/me.png"></casaferre-slider-round>
+        <casaferre-slider-round :size-px="100" image-path="../imgs/me.png"></casaferre-slider-round>
+        <casaferre-slider-round :size-px="150" image-path="../imgs/me.png" :move="onRotateMove" :done="onRotateDone"></casaferre-slider-round>
+        <div id="sliderValue"></div>
     </div>
 
 </div>

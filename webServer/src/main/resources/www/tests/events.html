@@ -14,14 +14,18 @@
         class TouchSliderRound {
 
             constructor(element, options) {
+                // Find the Element location on screen
+                var elementTop = element.getBoundingClientRect().top;
+                var elementLeft = element.getBoundingClientRect().left;
 
                 this.settings = $.extend({
                     rotate: true,
                     move: totalDegree => {},
                     done: totalDegree => {}}, options );
 
-                this.centerX = element.offsetWidth / 2;
-                this.centerY = element.offsetHeight / 2;
+                // Center point of element
+                this.centerX = elementLeft + (element.offsetWidth / 2);
+                this.centerY = elementTop + (element.offsetHeight / 2);
 
                 this.startDegree = null;
                 this.endDegree = null;
@@ -108,8 +112,8 @@
 </head>
 <body>
 
-<div style="height: 600px; width: 100%">HEJ</div>
-<img id="meAvatar" src="../imgs/me.png" style="width: 400px; height: 400px; border-radius: 50%;" alt="Avatar">
+<div style="height: 400px; width: 100%">HEJ</div>
+<img id="meAvatar" src="../imgs/me.png" style="width: 400px; height: 400px; border-radius: 50%;" alt="Avatar" />
 
 <h3>Log</h3>
 <div id="log"></div>

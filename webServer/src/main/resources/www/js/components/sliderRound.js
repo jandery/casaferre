@@ -25,16 +25,18 @@ Vue.component('casaferre-slider-round', {
         }
     },
     created() {
-        console.log("Center: " + this.centerX);
+    },
+    mounted() {
+        var elementTop = this.$el.getBoundingClientRect().top;
+        var elementLeft = this.$el.getBoundingClientRect().left;
+        this.centerX = elementLeft + (this.sizePx / 2);
+        this.centerY = elementTop + (this.sizePx / 2);
     },
     methods: {
         touchStart(event) {
             this.laps = 0;
             this.endDegree = null;
             this.startDegree = this.getDegree(event.touches[0].clientX, event.touches[0].clientY);
-            console.log("Start: " + this.startDegree);
-            console.log("Start X: " + event.touches[0].clientX);
-            console.log("Start Y: " + event.touches[0].clientY);
         },
         touchMove(event) {
             let currentDegree = this.getDegree(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
@@ -47,7 +49,6 @@ Vue.component('casaferre-slider-round', {
             this.endDegree = this.getDegree(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
             let totalMoveDegree = this.currentValue(this.endDegree);
             this.done(totalMoveDegree);
-            console.log("Start: " + this.endDegree);
         },
         getDegree(pointX, pointY) {
             let degree = Math.atan2(pointY - this.centerY, pointX - this.centerX) * 180 / Math.PI;
