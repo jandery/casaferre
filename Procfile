@@ -1,1 +1,1 @@
-web:    java $JAVA_OPTS -jar webServer/target/webServer-1.0-SNAPSHOT-jar-with-dependencies.jar
+web:    java -Drun_mode="run" $JAVA_OPTS -cp webServer/target/classes:webServer/target/dependency/* se.casaferre.MainKt
