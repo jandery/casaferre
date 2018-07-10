@@ -1,10 +1,12 @@
 package se.casaferre.webServer
 
+import se.casaferre.common.Temperature
 import se.casaferre.data.services.MonitorService
 import se.casaferre.webServer.controllers.FreemarkerController
 import se.casaferre.webServer.controllers.MonitorController
 import spark.Spark
 import spark.Redirect.Status
+import spark.Request
 import spark.Response
 
 /**
@@ -33,7 +35,19 @@ class WebServer(port: Int, environment: String, filesLocation: String) {
         // API server
         Spark.get("/hello") { _, _ -> "Hello World" }
         Spark.path("/v1") {
+            //
             MonitorController(MonitorService())
+            //
+            Spark.path("/temps") {
+                Spark.get("/c2f/:degree") { request: Request, response: Response ->
+                    val degree: Double = request.params(":degree").toDouble()
+                    Temperature.centigradeToFahrenheit(degree)
+                }
+                Spark.get("/f2c/:degree") { request: Request, response: Response ->
+                    val degree: Double = request.params(":degree").toDouble()
+                    Temperature.farenheightToCentigrade(degree)
+                }
+            }
         }
 
         // Shortcuts
