@@ -42,7 +42,9 @@ class WebServer(port: Int, environment: String, filesLocation: String) {
 
         // response.status only get
         Spark.afterAfter("/*") { request: Request, response: Response ->
-            if (response.status() == 500) { /* SEND EMAIL*/ }
+            if (response.status() == 500) {
+                /* SEND EMAIL*/
+            }
         }
 
 

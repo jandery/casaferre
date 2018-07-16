@@ -18,6 +18,7 @@ class FreemarkerController (private val cdnUrl: String) {
         Spark.get("/mid", ::getMidIndex, FreeMarkerEngine())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun getMidIndex(request: Request, response: Response): ModelAndView {
         val model: Map<String, Any> = mutableMapOf(
                 "baseHref" to cdnUrl,
