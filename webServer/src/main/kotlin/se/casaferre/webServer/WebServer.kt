@@ -29,6 +29,23 @@ class WebServer(port: Int, environment: String, filesLocation: String) {
             Spark.staticFiles.location(filesLocation)
         }
 
+        // response.status both get/set, will be 200 even if page not exists
+        Spark.before("/*") { request: Request, response: Response ->
+            request.session(true)
+            println("Before, session is new ${request.session().isNew()} and id is ${request.session().id()}")
+        }
+
+        // response.status both get/set, will be 200 even if page not exists
+        Spark.after("/*") { request: Request, response: Response ->
+            println("AfterAfter, status is ${response.status()}")
+        }
+
+        // response.status only get
+        Spark.afterAfter("/*") { request: Request, response: Response ->
+            if (response.status() == 500) { /* SEND EMAIL*/ }
+        }
+
+
         // Template server
         FreemarkerController("/")
 
@@ -46,6 +63,10 @@ class WebServer(port: Int, environment: String, filesLocation: String) {
                 Spark.get("/f2c/:degree") { request: Request, response: Response ->
                     val degree: Double = request.params(":degree").toDouble()
                     Temperature.farenheightToCentigrade(degree)
+                }
+                Spark.get("/c2c/:degree") { request: Request, response: Response ->
+                    response.status(500)
+                    ""
                 }
             }
         }
