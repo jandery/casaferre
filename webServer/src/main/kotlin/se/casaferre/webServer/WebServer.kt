@@ -4,6 +4,7 @@ import se.casaferre.common.Temperature
 import se.casaferre.data.services.MonitorService
 import se.casaferre.webServer.controllers.FreemarkerController
 import se.casaferre.webServer.controllers.MonitorController
+import se.casaferre.webServer.controllers.UtilsController
 import spark.Spark
 import spark.Redirect.Status
 import spark.Request
@@ -36,14 +37,15 @@ class WebServer(port: Int, environment: String, filesLocation: String) {
         }
 
         // response.status both get/set, will be 200 even if page not exists
-        Spark.after("/*") { request: Request, response: Response ->
-            println("AfterAfter, status is ${response.status()}")
+        Spark.after("/*") { _, response: Response ->
+            println("After, status is ${response.status()}")
         }
 
         // response.status only get
         Spark.afterAfter("/*") { request: Request, response: Response ->
+            println("AfterAfter, status is ${response.status()}")
             if (response.status() == 500) {
-                /* SEND EMAIL*/
+                /* SEND EMAIL TO DEV */
             }
         }
 
@@ -52,25 +54,22 @@ class WebServer(port: Int, environment: String, filesLocation: String) {
         FreemarkerController("/")
 
         // API server
-        Spark.get("/hello") { _, _ -> "Hello World" }
-        Spark.path("/v1") {
-            //
-            MonitorController(MonitorService())
-            //
-            Spark.path("/temps") {
-                Spark.get("/c2f/:degree") { request: Request, response: Response ->
-                    val degree: Double = request.params(":degree").toDouble()
-                    Temperature.centigradeToFahrenheit(degree)
-                }
-                Spark.get("/f2c/:degree") { request: Request, response: Response ->
-                    val degree: Double = request.params(":degree").toDouble()
-                    Temperature.farenheightToCentigrade(degree)
-                }
-                Spark.get("/c2c/:degree") { request: Request, response: Response ->
-                    response.status(500)
-                    ""
-                }
+        // Test halt vill end up in Spark.after and Spark.afterAfter
+        Spark.get("/halt/:code") { request: Request, response: Response ->
+            val code = request.params(":code").toInt()
+            if (code != 200) {
+                // Spark.after is NOT called here but Spark.afterAfter is
+                Spark.halt(code, "This is a custom status code")
             }
+            ""
+        }
+
+        // Controller for monitoring
+        MonitorController(MonitorService())
+
+        Spark.path("/v1") {
+            // Various good to have
+            UtilsController()
         }
 
         // Shortcuts
