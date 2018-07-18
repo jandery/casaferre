@@ -101,6 +101,12 @@ var sliderMixin = {
     }
 };
 
+/**
+ * Image version of round slider. Loads an img tag which will rotate with the touch move
+ * Example usage:
+ * <casaferre-img-slider-round :size-px="100" image-path="../imgs/me.png"></casaferre-img-slider-round>
+ * <casaferre-img-slider-round :size-px="150" image-path="../imgs/me.png" :move="onRotateImgMove" :done="onRotateImgDone"></casaferre-img-slider-round>
+ */
 Vue.component('casaferre-img-slider-round', {
     template: `<img 
 :src="imagePath" 
@@ -114,6 +120,12 @@ Vue.component('casaferre-img-slider-round', {
     }
 });
 
+/**
+ * Svg version of round slider. Loads a round svg image which will rotate with the touch move
+ * Example usage:
+ * <casaferre-svg-slider-round :size-px="100"></casaferre-svg-slider-round>
+ * <casaferre-svg-slider-round :size-px="150" color="#cc0000" line-color="#eeeeee" inner-size="75" :move="onRotateSvgMove" :done="onRotateSvgDone"></casaferre-svg-slider-round>
+ */
 Vue.component('casaferre-svg-slider-round', {
     template: `<svg xmlns="http://www.w3.org/2000/svg" :width="sizePx" :height="sizePx" viewBox="0 0 200 200" :style="{transform:'rotate(' + rotate + 'deg)'}">
                 <g @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
@@ -124,8 +136,11 @@ Vue.component('casaferre-svg-slider-round', {
                 </g>`,
     mixins: [sliderMixin],
     props: {
+        // Color of the circle
         color: { type: String, default: '#00cc00'},
+        // Two lines for user to see the rotation
         lineColor: { type: String, default: '#006600'},
+        // Size in percent of the white inner space
         innerSize: { type: Number, default: 50}
     }
 });
