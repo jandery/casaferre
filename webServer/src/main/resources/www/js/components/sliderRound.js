@@ -1,4 +1,3 @@
-// global Vue 
 /**
  * Component for a round slider. The sliders comes in Image version (img tag) and Svg version (svg tag)
  *
@@ -25,6 +24,8 @@
  *
  * Created by Jorgen Andersson on 2018-07-05.
  */
+
+// global Vue
 
 /**
  * Mixin, common for both slider types
