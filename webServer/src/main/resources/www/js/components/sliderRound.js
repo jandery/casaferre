@@ -1,9 +1,36 @@
 // global Vue 
 /**
- * Component for a round slider
+ * Component for a round slider. The sliders comes in Image version (img tag) and Svg version (svg tag)
+ *
+ * Methods:
+ * move => is called on touch move, i.e. when user is dragging finger across the screen.
+ * done => is called on touch end, i.e. when user lifts the finger.
+ * Example:
+ * function(value) { var flooredValue = Math.floor(value); console.log(flooredValue); }
+ *
+ * Common Variables:
+ * sizePx => size in Pixels for control
+ * Image Variables
+ * imagePath => path to image to be shown
+ * Svg Variables
+ * color => This is the color of rendered circle
+ * lineColor => One horizontal and one vertical line for user to see that the circle is rotating
+ * innerSize => Fill the center of circle with white to make circle doughnut style. Should be a value less than 100.
+ *
+ * Implementation Examples:
+ * <casaferre-img-slider-round :size-px="100" image-path="imgs/anImage.png"></casaferre-img-slider-round>
+ * <casaferre-img-slider-round :size-px="150" image-path="imgs/anImage.png" :move="onMove" :done="onDone"></casaferre-img-slider-round>
+ * <casaferre-svg-slider-round :size-px="100"></casaferre-svg-slider-round>
+ * <casaferre-svg-slider-round :size-px="150" color="#cc0000" line-color="#eeeeee" inner-size="75" :move="onMove" :done="onDone"></casaferre-svg-slider-round>
+ *
  * Created by Jorgen Andersson on 2018-07-05.
  */
-var sliderMixin = {
+
+/**
+ * Mixin, common for both slider types
+ * @type {{props: {sizePx: {type: NumberConstructor, default: number}, move: {type: FunctionConstructor, default: sliderMixin.props.move.default}, done: {type: FunctionConstructor, default: sliderMixin.props.done.default}}, data(): *, mounted(): void, methods: {touchStart(*): void, touchMove(*): void, touchEnd(*): void, getDegree(*): number, currentValue(*, *=): number}}}
+ */
+let sliderMixin = {
     props: {
         // Image size in Px
         sizePx: { type: Number, default: 100 },
@@ -34,8 +61,8 @@ var sliderMixin = {
      * This must be in mounted coz this.$el is undefined in created()
      */
     mounted() {
-        var elementTop = this.$el.getBoundingClientRect().top;
-        var elementLeft = this.$el.getBoundingClientRect().left;
+        let elementTop = this.$el.getBoundingClientRect().top;
+        let elementLeft = this.$el.getBoundingClientRect().left;
         this.centerX = elementLeft + (this.sizePx / 2);
         this.centerY = elementTop + (this.sizePx / 2);
     },
@@ -103,9 +130,6 @@ var sliderMixin = {
 
 /**
  * Image version of round slider. Loads an img tag which will rotate with the touch move
- * Example usage:
- * <casaferre-img-slider-round :size-px="100" image-path="../imgs/me.png"></casaferre-img-slider-round>
- * <casaferre-img-slider-round :size-px="150" image-path="../imgs/me.png" :move="onRotateImgMove" :done="onRotateImgDone"></casaferre-img-slider-round>
  */
 Vue.component('casaferre-img-slider-round', {
     template: `<img 
@@ -122,9 +146,6 @@ Vue.component('casaferre-img-slider-round', {
 
 /**
  * Svg version of round slider. Loads a round svg image which will rotate with the touch move
- * Example usage:
- * <casaferre-svg-slider-round :size-px="100"></casaferre-svg-slider-round>
- * <casaferre-svg-slider-round :size-px="150" color="#cc0000" line-color="#eeeeee" inner-size="75" :move="onRotateSvgMove" :done="onRotateSvgDone"></casaferre-svg-slider-round>
  */
 Vue.component('casaferre-svg-slider-round', {
     template: `<svg xmlns="http://www.w3.org/2000/svg" :width="sizePx" :height="sizePx" viewBox="0 0 200 200" :style="{transform:'rotate(' + rotate + 'deg)'}">
