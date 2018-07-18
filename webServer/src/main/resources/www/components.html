@@ -37,11 +37,17 @@
                     }
                 },
                 methods: {
-                    onRotateMove(value) {
-                        $("#sliderValue").text(value + " degr");
+                    onRotateImgMove(value) {
+                        $("#sliderValue1").text(value + " degr");
                     },
-                    onRotateDone(value) {
-                        $("#sliderValue").text("Stopped at " + value + " degr");
+                    onRotateImgDone(value) {
+                        $("#sliderValue1").text("Stopped at " + value + " degr");
+                    },
+                    onRotateSvgMove(value) {
+                        $("#sliderValue2").text(value + " degr");
+                    },
+                    onRotateSvgDone(value) {
+                        $("#sliderValue2").text("Stopped at " + value + " degr");
                     }
                 }
             });
@@ -53,22 +59,27 @@
 
 <div id="app">
 
-    <div class="frame">
+    <div class="frame" data-name="Simple Pie">
         <casaferre-simple-pie :value="22"></casaferre-simple-pie>
         <casaferre-simple-pie :size-px="200" :value="22" :background-color="colors[0]" :stroke-color="colors[1]"></casaferre-simple-pie>
     </div>
 
-    <div class="frame">
+    <div class="frame" data-name="Multiple value Pie">
         <casaferre-pie :size-px="100" :values="pieData" :colors="colors"></casaferre-pie>
         <casaferre-pie :size-px="200" :values="pieData" :colors="colors" :total-sum="1200"></casaferre-pie>
     </div>
 
-    <div class="frame">
-        <casaferre-slider-round :size-px="100" image-path="../imgs/me.png"></casaferre-slider-round>
-        <casaferre-slider-round :size-px="150" image-path="../imgs/me.png" :move="onRotateMove" :done="onRotateDone"></casaferre-slider-round>
-        <div id="sliderValue"></div>
+    <div class="frame" data-name="Round img slider">
+        <casaferre-img-slider-round :size-px="100" image-path="../imgs/me.png"></casaferre-img-slider-round>
+        <casaferre-img-slider-round :size-px="150" image-path="../imgs/me.png" :move="onRotateImgMove" :done="onRotateImgDone"></casaferre-img-slider-round>
+        <div id="sliderValue1"></div>
     </div>
 
+    <div class="frame" data-name="Round svg slider">
+        <casaferre-svg-slider-round :size-px="100"></casaferre-svg-slider-round>
+        <casaferre-svg-slider-round :size-px="150" color="#cc0000" line-color="#eeeeee" inner-size="75" :move="onRotateSvgMove" :done="onRotateSvgDone"></casaferre-svg-slider-round>
+        <div id="sliderValue2"></div>
+    </div>
 </div>
 
 </body>

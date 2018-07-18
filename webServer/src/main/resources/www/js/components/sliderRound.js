@@ -3,17 +3,10 @@
  * Component for a round slider
  * Created by Jorgen Andersson on 2018-07-05.
  */
-Vue.component('casaferre-slider-round', {
-    template: `<img 
-:src="imagePath" 
-@touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" 
-:style="{width: sizePx + 'px', height: sizePx + 'px', transform:'rotate(' + rotate + 'deg)'}" style="border-radius: 50%;" alt="Image">
-</img>`,
+var sliderMixin = {
     props: {
         // Image size in Px
         sizePx: { type: Number, default: 100 },
-        // Path to image
-        imagePath: { type: String, required: true },
         // Function to call on touchMove, i.e. when user swipes finger
         move: { type: Function, default: (value) => {}},
         // Function to call on touchEnd, i.e. when use lifts finger
@@ -97,7 +90,7 @@ Vue.component('casaferre-slider-round', {
                 if (previous > 350 && degree < 10) {
                     // Have completed a full clockwise lap
                     this.laps++;
-                } else if(previous < 10 && degree > 350) {
+                } else if (previous < 10 && degree > 350) {
                     // Have completed a full anti-clockwise lap
                     this.laps--;
                 }
@@ -105,5 +98,34 @@ Vue.component('casaferre-slider-round', {
             // Calculate how many degrees in total from touch start
             return (this.laps * 360) + (degree - this.startDegree);
         }
+    }
+};
+
+Vue.component('casaferre-img-slider-round', {
+    template: `<img 
+:src="imagePath" 
+@touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" 
+:style="{width: sizePx + 'px', height: sizePx + 'px', transform:'rotate(' + rotate + 'deg)'}" style="border-radius: 50%;" alt="Image">
+</img>`,
+    mixins: [sliderMixin],
+    props: {
+        // Path to image
+        imagePath: { type: String, required: true }
+    }
+});
+
+Vue.component('casaferre-svg-slider-round', {
+    template: `<svg xmlns="http://www.w3.org/2000/svg" :width="sizePx" :height="sizePx" viewBox="0 0 200 200" :style="{transform:'rotate(' + rotate + 'deg)'}">
+                <g @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
+                    <circle cx="100" cy="100" r="100" :style="{fill:color}"/>
+                    <line x1="0" y1="100" x2="200" y2="100" :style="{stroke:lineColor}"/>
+                    <line x1="100" y1="0" x2="100" y2="200" :style="{stroke:lineColor}"/>
+                    <circle cx="100" cy="100" :r="innerSize" style="fill:#ffffff"/>
+                </g>`,
+    mixins: [sliderMixin],
+    props: {
+        color: { type: String, default: '#00cc00'},
+        lineColor: { type: String, default: '#006600'},
+        innerSize: { type: Number, default: 50}
     }
 });

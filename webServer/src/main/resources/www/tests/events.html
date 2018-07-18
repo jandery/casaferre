@@ -24,8 +24,8 @@
                     done: totalDegree => {}}, options );
 
                 // Center point of element
-                this.centerX = elementLeft + (element.offsetWidth / 2);
-                this.centerY = elementTop + (element.offsetHeight / 2);
+                this.centerX = elementLeft + (element.offsetWidth ? element.offsetWidth / 2 : element.getBBox().width);
+                this.centerY = elementTop + (element.offsetHeight ? element.offsetHeight / 2 : element.getBBox().height);
 
                 this.startDegree = null;
                 this.endDegree = null;
@@ -37,7 +37,7 @@
                     event => {
                         this.laps = 0;
                         this.endDegree = null;
-                        this.startDegree = this.calcDegree(event.touches[0].clientX, event.touches[0].clientY);
+                        this.startDegree = this.calcDegree(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
                     },
                     false);
                 element.addEventListener(
@@ -99,13 +99,21 @@
         };
 
         $(document).ready(function () {
-            let slider = new TouchSliderRound(
+            let imgSlider = new TouchSliderRound(
                 document.getElementById("meAvatar"),
                 {
                     rotate: true,
                     move: degree => { $("#log").text("Current slide at: " + degree + " degr"); },
                     done: degree => { $("#log").text("Stopped at: " + degree + " degr"); }
                 });
+
+            let svgSlider = new TouchSliderRound(
+                document.getElementById("svgGroup"),
+                {
+                    rotate: true,
+                    move: degree => { $("#log").text("Current slide at: " + degree + " degr"); },
+                    done: degree => { $("#log").text("Stopped at: " + degree + " degr"); }
+                })
         });
 
     </script>
@@ -114,6 +122,15 @@
 
 <div style="height: 400px; width: 100%">HEJ</div>
 <img id="meAvatar" src="../imgs/me.png" style="width: 400px; height: 400px; border-radius: 50%;" alt="Avatar" />
+
+<svg id="svgGroup" xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 200 200" style="border: 1px solid #cccccc;">
+    <g>
+        <circle cx="100" cy="100" r="100" style="fill:#00cc00"/>
+        <line x1="0" y1="100" x2="200" y2="100" style="stroke:#006600;"/>
+        <line x1="100" y1="0" x2="100" y2="200" style="stroke:#006600;"/>
+        <circle cx="100" cy="100" r="50" style="fill:#ffffff"/>
+    </g>
+</svg>
 
 <h3>Log</h3>
 <div id="log"></div>
