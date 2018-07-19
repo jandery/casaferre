@@ -3,7 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>SVG Test</title>
+    <style>
+
+        body {
+            font-family: "Roboto Condensed", "Lucida Grande", sans-serif;
+        }
+        div.item {
+            padding: 20px; margin-top: 20px; border: 1px solid green;
+            max-width: 200px;
+        }
+    </style>
+    <script type="text/javascript" src="../js/libs/jquery-3.3.1.min.js"></script>
     <script>
+
+        $(document).ready(function () {
+
+            $( "div.item" )
+                .mouseenter(function() {
+                    var svgId = $(this).attr("data-id");
+                    $("#" + svgId).css("stroke", "#cc0000");
+                })
+                .mouseleave(function() {
+                    var svgId = $(this).attr("data-id");
+                    console.log(svgId);
+                    $("#" + svgId).css("stroke", "#333333");
+                });
+        });
 
     </script>
 </head>
@@ -13,21 +38,16 @@
     <tr>
         <td>
             <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 1000 1000" style="border: 1px solid #cccccc;">
-                <rect x="200" y="500" width="700" height="250" style="stroke: #000000; fill:none;"/>
-                <circle cx="200" cy="200" r="100" style="stroke:#006600; fill:#00cc00"/>
+                <rect id="aaa001" x="200" y="500" width="700" height="250" style="stroke: #000000; fill:none;"/>
+                <circle id="bbb001" cx="200" cy="200" r="100" style="fill:#00cc00"/>
+                <circle id="bbb002" cx="300" cy="300" r="100" style="fill:#00cc00"/>
             </svg>
             <hr/>
-            <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 200 200" style="border: 1px solid #cccccc;">
-                <g>
-                    <circle cx="100" cy="100" r="100" style="fill:#00cc00"/>
-                    <line x1="0" y1="100" x2="200" y2="100" style="stroke:#006600;"/>
-                    <line x1="100" y1="0" x2="100" y2="200" style="stroke:#006600;"/>
-                    <circle cx="100" cy="100" r="50" style="fill:#ffffff"/>
-                </g>
-            </svg>
         </td>
-        <td>
-
+        <td valign="top">
+            <div class="item" data-id="aaa001">Hus</div>
+            <div class="item" data-id="bbb001">Buske</div>
+            <div class="item" data-id="bbb002">Buske</div>
         </td>
     </tr>
 </table>

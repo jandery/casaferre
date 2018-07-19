@@ -3,24 +3,68 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width,initial-scale=1,minimal-ui" name="viewport">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
     <link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/vue-material.min.css">
     <link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/theme/default.css">
     <style>
         .md-content {
-            width: 250px;
+            width: 100%;
             height: 250px;
             display: inline-flex;
             justify-content: center;
             align-items: center;
         }
+        .md-list {
+            width: 100%;
+        }
     </style>
+
+    <script type="text/javascript" src="../js/libs/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/libs/vue-2.5.3.min.js"></script>
+    <script src="https://unpkg.com/vue-material@beta"></script>
+    <script src="js/stallet.js"></script>
+    <script>
+        Vue.use(VueMaterial.default);
+
+        $(document).ready(function () {
+            new Vue({
+                el: '#app',
+                data() {
+                    return {
+                        index: 0,
+                        stable: new Stable(
+                            [PEOPLE.CISSI, PEOPLE.CURT],
+                            [new Box("B1"), new Box("B2"), new Box("B3"), new Box("B4"), new Box("B5")],
+                            [
+                                new Paddock("P1", "Sommarhage 1"),
+                                new Paddock("P2", "Sommarhage 2"),
+                                new Paddock("P3", "Vinterhage 1"),
+                                new Paddock("P4", "Vinterhage 2")],
+                            [
+                                new Horse("H1", "Bersi", PEOPLE.LENA, [PEOPLE.ASE, PEOPLE.KAJSA]),
+                                new Horse("H2", "Sleipnir", PEOPLE.MONA, [PEOPLE.AMI]),
+                                new Horse("H3", "Tyson", PEOPLE.CISSI, []),
+                                new Horse("H4", "Donatello", PEOPLE.CISSI, [])])
+                    }
+                }
+
+            });
+        });
+    </script>
 </head>
 
 <body>
 <div id="app">
 
-    <md-card>
+    <md-card v-if="index == 0">
+        <md-card-header>
+            <div class="md-title">Att göra</div>
+        </md-card-header>
+
+    </md-card>
+
+    <md-card v-if="index == 1">
         <md-card-header>
             <div class="md-title">Flytta</div>
         </md-card-header>
@@ -44,23 +88,48 @@
         </md-card-content>
     </md-card>
 
+    <md-card v-if="index == 2">
+        <md-card-header>
+            <div class="md-title">Info</div>
+        </md-card-header>
+
+        <md-content>
+            <md-list class="md-double-line">
+                <template v-for="horse in stable.horses">
+                    <md-subheader>{{horse.name}}</md-subheader>
+
+                    <md-list-item>
+                        <md-icon class="md-primary">person</md-icon>
+                        <div class="md-list-item-text">
+                            <span>{{horse.owner.name}}</span>
+                            <span>{{horse.owner.mobile}}</span>
+                        </div>
+                    </md-list-item>
+
+                    <md-list-item>
+                        <md-icon class="md-primary">group</md-icon>
+                        <div class="md-list-item-text" v-for="rider in horse.fellows">
+                            <span>{{rider.name}}</span>
+                            <span>{{rider.mobile}}</span>
+                        </div><br/>
+                    </md-list-item>
+
+                    <md-divider></md-divider>
+                </template>
+            </md-list>
+        </md-content>
+
+    </md-card>
 
     <md-bottom-bar md-type="fixed">
-        <md-bottom-bar-item id="bottom-bar-item-home" md-label="Home" md-icon="home"></md-bottom-bar-item>
-        <md-bottom-bar-item id="bottom-bar-item-pages" md-label="Pages" md-icon="pages"></md-bottom-bar-item>
-        <md-bottom-bar-item id="bottom-bar-item-favorites" md-label="Favorites" md-icon="favorite"></md-bottom-bar-item>
+        <md-bottom-bar-item @click="index = 0" id="bottom-bar-item-home" md-label="Start"
+                            md-icon="list"></md-bottom-bar-item>
+        <md-bottom-bar-item @click="index = 1" id="bottom-bar-item-pages" md-label="Flytta"
+                            md-icon="transfer_within_a_station"></md-bottom-bar-item>
+        <md-bottom-bar-item @click="index = 2" id="bottom-bar-item-favorites" md-label="Information"
+                            md-icon="info"></md-bottom-bar-item>
     </md-bottom-bar>
+
 </div>
-
-<script src="https://unpkg.com/vue"></script>
-<script src="https://unpkg.com/vue-material@beta"></script>
-<script>
-    Vue.use(VueMaterial.default);
-
-    new Vue({
-        el: '#app'
-    });
-
-</script>
 </body>
 </html>
