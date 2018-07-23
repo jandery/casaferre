@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="//unpkg.com/jquery@3.2.1/dist/jquery.js"></script>
+
+    <script>
+        // Source File
+
+        var HelloWorld = function () {
+            this.greeting = function () {
+                return "Hello, World";
+            };
+            this.getValue = function () {
+                return 7;
+            };
+        };
+
+
+        var tests = [];
+
+        function test(name, f) {
+            tests.push({n: name, m: []});
+            f();
+        }
+
+        function run() {
+            for (var i = 0; i < tests.length; i++) {
+                console.log(tests[i].n);
+                for (var j = 0; j < tests[i].m.length; j++) {
+                    console.log("  " + tests[i].m[j].request + ": " + tests[i].m[j].result);
+                }
+            }
+        }
+
+        class Assert {
+            constructor(a) {
+                this.request = "";
+                this.result = false;
+                this.a = a;
+            }
+
+            static assertThat(a) {
+                var obj = new Assert(a);
+                tests[tests.length - 1].m.push(obj);
+                return obj;
+            }
+
+            setRequest(method, a, b, c) {
+                this.request = `'${a}' ${method} '${b}'`;
+                if (c) {
+                    this.request += ` and '${c}'`;
+                }
+            }
+
+            isEqualTo(b) {
+                this.setRequest("isEqualTo", this.a, b);
+                this.result = this.a === b;
+            }
+
+            isGreaterThan(b) {
+                this.setRequest("isGreaterThan", this.a, b);
+                this.result = this.a > b;
+            }
+
+            isLessThan(b) {
+                this.setRequest("isLessThan", this.a, b);
+                this.result = this.a < b;
+            }
+
+            isBetween(b, c) {
+                this.setRequest("isBetween", this.a, b, c);
+                this.result = this.a > b && this.a < c;
+            }
+        }
+
+    </script>
+</head>
+<body>
+
+<div id="log"></div>
+
+<script>
+
+
+    // Test File
+    assert('should say hello', () => {
+        var helloWorld = new HelloWorld();
+        Assert.assertThat(helloWorld.greeting()).isEqualTo("Hello, World");
+    });
+
+    assert('should be 7', () => {
+        var helloWorld = new HelloWorld();
+        Assert.assertThat(helloWorld.getValue()).isEqualTo(7);
+        Assert.assertThat(helloWorld.getValue()).isBetween(6, 8);
+    });
+
+    run();
+
+</script>
+</body>
+</html>
