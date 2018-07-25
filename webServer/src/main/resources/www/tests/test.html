@@ -1,67 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script type="text/javascript" src="//unpkg.com/jquery@3.2.1/dist/jquery.js"></script>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1,minimal-ui" name="viewport">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
+    <link rel="stylesheet" href="../css/vue-material-1.0.0.beta.min.css">
+    <link rel="stylesheet" href="../css/vue-material-theme-1.0.0.beta.min.css">
+    <style>
+        .w100 {
+            width: 100px;
+            height: 100px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .enckey {
+            width: 300px;
+            height: 100px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+        sup {
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <script type="text/javascript" src="../js/libs/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../js/libs/vue-2.5.3.min.js"></script>
+    <script type="text/javascript" src="../js/libs/vue-material-1.0.0.beta.min.js"></script>
     <script>
 
-        var prioList = [
-            [1, 2, 3, 4],
-            [5, 6, 7, 8],
-            [9, 10, 11, 12],
-            [1],
-            [1, 4, 7, 10],
-            [2, 5, 8, 11],
-            [3, 6, 9, 12]
+        Vue.use(VueMaterial.default);
 
-        ];
+        $(document).ready(function () {
+            new Vue({
+                el: '#app',
+                data() {
+                    return {
+                        key: "",
+                        k:[],
+                        text: "",
+                        t: []
+                    }
+                },
+                created() {
+                    this.key = "12345678abcdefgh";
+                    this.k.push(this.str4long(this.key.substr(0,4)));
+                    this.k.push(this.str4long(this.key.substr(4,4)));
+                    this.k.push(this.str4long(this.key.substr(8,4)));
+                    this.k.push(this.str4long(this.key.substr(12,4)));
 
-        var system1 = [
-            [1, 1, 0, 1, 0, 0],
-            [0, 1, 1, 0, 1, 0],
-            [0, 0, 1, 1, 0, 1],
-            [0, 1, 0, 0, 1, 1],
-            [1, 0, 0, 1, 1, 0],
-            [1, 0, 1, 0, 0, 1]
-        ];
-
-
-        class Hovno {
-            constructor(system, list) {
-                this.system = system;
-                this.list = list;
-                this.index = 0;
-                this.singles = list
-                    .map((value, index) => {
-                        return {index: index, value: value}
-                    })
-                    .filter(race => race.value.length === 1)
-                    .map(item => item.index);
-            }
-
-            getSingles() {
-                return this.singles;
-            }
-
-            row(index) {
-                var race = this.system[index];
-                var rtn = [];
-                for (var i = 0; i < 6; i++) {
-                    rtn.push(race[i] ? prioList[i] : prioList[i].slice(0, 1));
+                    this.text = "abcdefghijklmnop";
+                    this.t.push(this.str4long(this.text.substr(0,4)));
+                    this.t.push(this.str4long(this.text.substr(4,4)));
+                    this.t.push(this.str4long(this.text.substr(8,4)));
+                    this.t.push(this.str4long(this.text.substr(12,4)));
+                    },
+                methods: {
+                    toCharCode(s) {
+                        var arr = [];
+                        for (var i = 0; i < s.length; i++) {
+                            arr.push(s.charCodeAt(i));
+                        }
+                        return arr;
+                    },
+                    toBitCode(s) {
+                        var arr = this.toCharCode(s);
+                        // https://blog.ashryan.io/converting-base-10-binary-javascript/
+                        return arr.map(item => item.toString(2));
+                    },
+                    str4long(s) {
+                        return (s.charCodeAt(0) << 24) | (((s.charCodeAt(1)) & 0xff) << 16) | (((s.charCodeAt(2)) & 0xff) << 8) | ((s.charCodeAt(3)) & 0xff);
+                    }
                 }
-                return rtn;
-            }
-        }
-
-
-        var tada = new Hovno(system1, prioList);
-        console.log(tada.getSingles());
-        tada.row(0);
+            });
+        });
 
     </script>
 </head>
 <body>
+<div id="app">
 
+    <md-card>
+        <md-card-header>
+            <div class="md-title">Bersi</div>
+        </md-card-header>
+
+        <md-card-content>
+            <div>
+
+            </div>
+        </md-card-content>
+    </md-card>
+
+
+    <md-card>
+        <md-card-header>
+            <div class="md-title">Integer</div>
+        </md-card-header>
+
+        <md-card-content>
+            <div>
+                <md-content class="w100 md-elevation-6">1</md-content>&nbsp;&nbsp;&nbsp;&nbsp;
+                <md-content class="w100 md-elevation-6">4</md-content>&nbsp;&nbsp;&nbsp;&nbsp;
+                <md-content class="w100 md-elevation-6">0</md-content>&nbsp;&nbsp;&nbsp;&nbsp;
+                <md-content class="w100 md-elevation-6">7</md-content>&nbsp;&nbsp;&nbsp;&nbsp;
+                <md-content class="w100 md-elevation-6">6</md-content>
+            </div>
+            <div>is the same thing as</div>
+            <div>
+                <md-content class="w100 md-elevation-6">1 x 10000</md-content>&nbsp;+&nbsp;
+                <md-content class="w100 md-elevation-6">4 x 1000</md-content>&nbsp;+&nbsp;
+                <md-content class="w100 md-elevation-6">0 x 100</md-content>&nbsp;+&nbsp;
+                <md-content class="w100 md-elevation-6">7 x 10</md-content>&nbsp;+&nbsp;
+                <md-content class="w100 md-elevation-6">6 x 1</md-content>
+            </div>
+            <div>is the same thing as</div>
+            <div>
+                <md-content class="w100 md-elevation-6">1 x 10<sup>4</sup></md-content>&nbsp;+&nbsp;
+                <md-content class="w100 md-elevation-6">4 x 10<sup>3</sup></md-content>&nbsp;+&nbsp;
+                <md-content class="w100 md-elevation-6">0 x 10<sup>2</sup></md-content>&nbsp;+&nbsp;
+                <md-content class="w100 md-elevation-6">7 x 10<sup>1</sup></md-content>&nbsp;+&nbsp;
+                <md-content class="w100 md-elevation-6">6 x 10<sup>0</sup></md-content>
+            </div>
+        </md-card-content>
+    </md-card>
+
+
+
+    <md-card>
+        <md-card-header>
+            <div class="md-title">Symetric encryption Encryption</div>
+        </md-card-header>
+
+        <md-card-content>
+            <h3>Key: &quot;{{key}}&quot;</h3>
+            <div>
+                <md-content class="enckey md-elevation-6 md-primary">k[0]</md-content>
+                <md-content class="enckey md-elevation-6 md-primary">k[1]</md-content>
+                <md-content class="enckey md-elevation-6 md-primary">k[2]</md-content>
+                <md-content class="enckey md-elevation-6 md-primary">k[3]</md-content>
+            </div>
+            <div>
+                <md-content class="enckey md-elevation-6">{{key.substr(0,4)}}</md-content>
+                <md-content class="enckey md-elevation-6">{{key.substr(4,4)}}</md-content>
+                <md-content class="enckey md-elevation-6">{{key.substr(8,4)}}</md-content>
+                <md-content class="enckey md-elevation-6">{{key.substr(12,4)}}</md-content>
+            </div>
+            <div>
+                <md-content class="enckey md-elevation-6">{{toCharCode(key.substr(0,4))}}</md-content>
+                <md-content class="enckey md-elevation-6">{{toCharCode(key.substr(4,4))}}</md-content>
+                <md-content class="enckey md-elevation-6">{{toCharCode(key.substr(8,4))}}</md-content>
+                <md-content class="enckey md-elevation-6">{{toCharCode(key.substr(12,4))}}</md-content>
+            </div>
+            <div>
+                <md-content class="enckey md-elevation-6">{{toBitCode(key.substr(0,4))}}</md-content>
+                <md-content class="enckey md-elevation-6">{{toBitCode(key.substr(4,4))}}</md-content>
+                <md-content class="enckey md-elevation-6">{{toBitCode(key.substr(8,4))}}</md-content>
+                <md-content class="enckey md-elevation-6">{{toBitCode(key.substr(12,4))}}</md-content>
+            </div>
+            <div>
+                <md-content class="enckey md-elevation-6 md-primary">{{k[0]}}</md-content>
+                <md-content class="enckey md-elevation-6 md-primary">{{k[1]}}</md-content>
+                <md-content class="enckey md-elevation-6 md-primary">{{k[2]}}</md-content>
+                <md-content class="enckey md-elevation-6 md-primary">{{k[3]}}</md-content>
+            </div>
+        </md-card-content>
+
+        <md-card-content>
+            <h3>Cleartext: &quot;{{text}}&quot;</h3>
+
+            <div>
+                <md-content class="enckey md-elevation-6 md-accent">t[0]</md-content>
+                <md-content class="enckey md-elevation-6 md-accent">t[1]</md-content>
+                <md-content class="enckey md-elevation-6 md-accent">t[2]</md-content>
+                <md-content class="enckey md-elevation-6 md-accent">t[3]</md-content>
+            </div>
+            <div>
+                <md-content class="enckey md-elevation-6">{{text.substr(0,4)}}</md-content>
+                <md-content class="enckey md-elevation-6">{{text.substr(4,4)}}</md-content>
+                <md-content class="enckey md-elevation-6">{{text.substr(8,4)}}</md-content>
+                <md-content class="enckey md-elevation-6">{{text.substr(12,4)}}</md-content>
+            </div>
+            <div>
+                <md-content class="enckey md-elevation-6">{{toCharCode(text.substr(0,4))}}</md-content>
+                <md-content class="enckey md-elevation-6">{{toCharCode(text.substr(4,4))}}</md-content>
+                <md-content class="enckey md-elevation-6">{{toCharCode(text.substr(8,4))}}</md-content>
+                <md-content class="enckey md-elevation-6">{{toCharCode(text.substr(12,4))}}</md-content>
+            </div>
+            <div>
+                <md-content class="enckey md-elevation-6">{{toBitCode(text.substr(0,4))}}</md-content>
+                <md-content class="enckey md-elevation-6">{{toBitCode(text.substr(4,4))}}</md-content>
+                <md-content class="enckey md-elevation-6">{{toBitCode(text.substr(8,4))}}</md-content>
+                <md-content class="enckey md-elevation-6">{{toBitCode(text.substr(12,4))}}</md-content>
+            </div>
+            <div>
+                <md-content class="enckey md-elevation-6 md-accent">{{t[0]}}</md-content>
+                <md-content class="enckey md-elevation-6 md-accent">{{t[1]}}</md-content>
+                <md-content class="enckey md-elevation-6 md-accent">{{t[2]}}</md-content>
+                <md-content class="enckey md-elevation-6 md-accent">{{t[3]}}</md-content>
+            </div>
+        </md-card-content>
+    </md-card>
+
+</div>
 </body>
 </html>

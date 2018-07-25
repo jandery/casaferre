@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1,minimal-ui" name="viewport">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
+    <link rel="stylesheet" href="css/vue-material-1.0.0.beta.min.css">
+    <link rel="stylesheet" href="css/vue-material-theme-1.0.0.beta.min.css">
+    <style>
+
+    </style>
+
+    <script type="text/javascript" src="js/libs/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/libs/vue-2.5.3.min.js"></script>
+    <script type="text/javascript" src="js/libs/vue-material-1.0.0.beta.min.js"></script>
+    <script type="text/javascript" src="js/v75.js"></script>
+    <script>
+        Vue.use(VueMaterial.default);
+
+        $(document).ready(function () {
+            new Vue({
+                el: '#app',
+                data() {
+                    return {
+                        race: [[],[],[],[],[],[],[]]
+                    }
+                }
+
+            });
+        });
+    </script>
+</head>
+
+<body>
+<div id="app">
+
+    <md-card>
+        <md-card-header>
+            <div class="md-title">Tips</div>
+        </md-card-header>
+
+        <md-card-content>
+            <div>
+                <md-chip md-deletable>1</md-chip>
+                <md-chip md-deletable>6</md-chip>
+                <md-chip md-deletable>7</md-chip>
+            </div>
+        </md-card-content>
+
+        <md-card-content>
+            <div>
+                <md-chip md-deletable>4</md-chip>
+                <md-chip md-deletable>8</md-chip>
+                <md-chip md-deletable>9</md-chip>
+            </div>
+        </md-card-content>
+    </md-card>
+
+
+
+
+</div>
+</body>
+</html>
