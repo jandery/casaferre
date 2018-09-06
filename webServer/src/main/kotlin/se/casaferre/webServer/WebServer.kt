@@ -11,7 +11,7 @@ import spark.Request
 import spark.Response
 
 /**
- * Purpose of this file is ...
+ * Purpose of this file is to run a SparkJava WebServer
  *
  * Created by Jorgen Andersson on 2018-06-29.
  */
@@ -34,16 +34,22 @@ class WebServer(port: Int, environment: String, filesLocation: String) {
         Spark.before("/*") { request: Request, response: Response ->
             request.session(true)
             println("Before, session is new ${request.session().isNew()} and id is ${request.session().id()}")
+            println(request.pathInfo())
         }
 
         // response.status both get/set, will be 200 even if page not exists
-        Spark.after("/*") { _, response: Response ->
+        Spark.after("/*") { request: Request, response: Response ->
             println("After, status is ${response.status()}")
+            println(request.pathInfo())
         }
+
+        // GZIP Everything
+        Spark.after("/*") { _, response: Response -> response.header("Content-Encoding", "gzip") }
 
         // response.status only get
         Spark.afterAfter("/*") { request: Request, response: Response ->
             println("AfterAfter, status is ${response.status()}")
+            println(request.pathInfo())
             if (response.status() == 500) {
                 /* SEND EMAIL TO DEV */
             }
@@ -75,8 +81,6 @@ class WebServer(port: Int, environment: String, filesLocation: String) {
         // Shortcuts
         Spark.redirect.get("/mid99", "https://boiling-torch-802.firebaseapp.com/", Status.TEMPORARY_REDIRECT);
 
-        // GZIP Everything
-        Spark.after("/*") { _, response: Response -> response.header("Content-Encoding", "gzip") }
 
         // Init/Start server
         Spark.init()

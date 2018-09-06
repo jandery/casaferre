@@ -83,14 +83,23 @@ var prioList = [
     [ 5, 1, 3, 6],
     [ 7, 3, 4, 5, 6],
     [ 7,14,15]
-
 ];
 
-var tada = new ReducedHorseSystem(reducedSystems.system1, prioList);
-for (var i = 0; i < tada.rowCount(); i++) {
-    let row = tada.row(i);
-    console.log("Cost for " + i + ": " + tada.rowCost(i));
+console.warn("FIRST");
+var first = new ReducedHorseSystem(reducedSystems.system1, prioList);
+for (var i = 0; i < first.rowCount(); i++) {
+    let row = first.row(i);
     console.log(row);
+    console.log("Cost for " + i + ": " + first.rowCost(i));
 }
-console.log("TOTAL");
-console.log(tada.totalCost());
+console.log("TOTAL: " + first.totalCost());
+
+
+console.warn("SECOND");
+var second = new ReducedHorseSystem(reducedSystems.system2, prioList);
+for (var i = 0; i < second.rowCount(); i++) {
+    let row = second.row(i);
+    console.log(row);
+    console.log("Cost for " + i + ": " + second.rowCost(i));
+}
+console.log("TOTAL: " + second.totalCost());
