@@ -76,21 +76,30 @@ class ReducedHorseSystem {
 }
 
 var prioList = [
-    [1, 2, 3, 4],
-    [5, 6, 7, 8],
-    [9, 10, 11, 12],
-    [1],
-    [1, 4, 7, 10],
-    [2, 5, 8, 11],
-    [3, 6, 9, 12]
-
+    [ 7, 1, 2, 3, 4,11,12],
+    [ 5, 1, 9,10,12],
+    [ 8, 2, 7, 9],
+    [12, 4, 5, 7, 8],
+    [ 1, 3],
+    [12,10, 1, 2,11],
+    [ 8]
 ];
 
-var tada = new ReducedHorseSystem(reducedSystems.system1, prioList);
-for (var i = 0; i < tada.rowCount(); i++) {
-    let row = tada.row(i);
-    console.log("Cost for " + i + ": " + tada.rowCost(i));
+console.warn("FIRST");
+var first = new ReducedHorseSystem(reducedSystems.system1, prioList);
+for (var i = 0; i < first.rowCount(); i++) {
+    let row = first.row(i);
     console.log(row);
+    console.log("Cost for " + i + ": " + first.rowCost(i));
 }
-console.log("TOTAL");
-console.log(tada.totalCost());
+console.log("TOTAL: " + first.totalCost());
+
+
+console.warn("SECOND");
+var second = new ReducedHorseSystem(reducedSystems.system2, prioList);
+for (var i = 0; i < second.rowCount(); i++) {
+    let row = second.row(i);
+    console.log(row);
+    console.log("Cost for " + i + ": " + second.rowCost(i));
+}
+console.log("TOTAL: " + second.totalCost());

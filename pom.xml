@@ -18,6 +18,7 @@
         <module>data</module>
         <module>webServer</module>
         <module>security</module>
+        <module>experiment</module>
     </modules>
 
 
