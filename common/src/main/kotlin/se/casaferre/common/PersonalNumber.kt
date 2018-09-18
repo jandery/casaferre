@@ -10,34 +10,39 @@ import java.util.regex.Pattern
  */
 class PersonalNumber(private val ssn: String) {
 
-    private val SWEDISH_SSN_PATTERN_FULL = Pattern.compile("^[12]{1}[90]{1}[0-9]{6}[0-9]{4}$")
+    private val SWEDISH_SSN_PATTERN_FULL = Pattern.compile("^(19|20)[0-9]{6}[0-9]{4}$")
 
     fun isValid(): Boolean {
+        return isFormatValid() && isChecksumValid()
+    }
+
+    fun isFormatValid(): Boolean {
         return SWEDISH_SSN_PATTERN_FULL.matcher(ssn).matches()
     }
 
+    fun isChecksumValid(): Boolean {
+        return getChecksumValue(ssn) == Integer.parseInt(ssn.substring(11, 12))
+    }
+
     fun isMale(): Boolean {
-        return isValid() && Character.getNumericValue(ssn.get(10)) % 2 != 0
+        return isFormatValid() && Character.getNumericValue(ssn.get(10)) % 2 != 0
     }
 
     fun isFemale(): Boolean {
-        return isValid() && Character.getNumericValue(ssn.get(10)) % 2 == 0
+        return isFormatValid() && Character.getNumericValue(ssn.get(10)) % 2 == 0
     }
 
-    fun isChecksumValid(): Boolean {
-        val checksum = calculateSwedishSsn(Integer.parseInt(ssn.substring(2, 3)), 2) +
-                calculateSwedishSsn(Integer.parseInt(ssn.substring(3, 4)), 1) +
-                calculateSwedishSsn(Integer.parseInt(ssn.substring(4, 5)), 2) +
-                calculateSwedishSsn(Integer.parseInt(ssn.substring(5, 6)), 1) +
-                calculateSwedishSsn(Integer.parseInt(ssn.substring(6, 7)), 2) +
-                calculateSwedishSsn(Integer.parseInt(ssn.substring(7, 8)), 1) +
-                calculateSwedishSsn(Integer.parseInt(ssn.substring(8, 9)), 2) +
-                calculateSwedishSsn(Integer.parseInt(ssn.substring(9, 10)), 1) +
-                calculateSwedishSsn(Integer.parseInt(ssn.substring(10, 11)), 2)
+    private fun getChecksumValue(ssn: String): Int {
+        val checksum = ssn
+                .subSequence(2, 11)
+                .mapIndexed { index, c ->
+                    val multiplier = if (index % 2 == 0) 2 else 1
+                    calculateSwedishSsn(Character.getNumericValue(c), multiplier)
+                }
+                .sum()
 
-        return 10 - checksum % 10 == Integer.parseInt(ssn.substring(11, 12))
+        return 10 - checksum % 10
     }
-
 
 
     private fun calculateSwedishSsn(value: Int, position: Int): Int {
@@ -45,5 +50,11 @@ class PersonalNumber(private val ssn: String) {
             return (value * position) % 9
         }
         return 9
+    }
+
+    companion object {
+        fun isValid(ssn: String): Boolean {
+            return PersonalNumber(ssn).isValid()
+        }
     }
 }
