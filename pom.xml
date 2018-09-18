@@ -26,8 +26,6 @@
 
         <kmongo.version>3.6.3</kmongo.version>
         <kotlin.version>1.2.70</kotlin.version>
-        <lombok.version>1.16.18</lombok.version>
-        <spark.version>2.7.1</spark.version>
         <jackson.version>2.9.5</jackson.version>
         <junit.version>4.12</junit.version>
         <assertj.version>3.8.0</assertj.version>
@@ -72,28 +70,61 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <!-- https://maven.apache.org/pom.html#Plugin_Management -->
+            <plugins>
+                <plugin>
+                    <!-- Build kotlin -->
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-maven-plugin</artifactId>
+                    <version>${kotlin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>compile</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                            <configuration>
+                                <sourceDirs>
+                                    <source>src/main/kotlin</source>
+                                </sourceDirs>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>test-compile</id>
+                            <phase>test-compile</phase>
+                            <goals>
+                                <goal>test-compile</goal>
+                            </goals>
+                            <configuration>
+                                <sourceDirs>
+                                    <source>src/test/kotlin</source>
+                                </sourceDirs>
+                            </configuration>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <jvmTarget>1.8</jvmTarget>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <configuration>
-                    <jvmTarget>1.8</jvmTarget>
-                </configuration>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <version>${kotlin.version}</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
                         <goals>
-                            <goal>compile</goal>
+                            <goal>copy-dependencies</goal>
                         </goals>
-                    </execution>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
+                        <configuration>
+                            <includeScope>compile</includeScope>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

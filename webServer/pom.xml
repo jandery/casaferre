@@ -42,15 +42,9 @@
             <version>${schinzel.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jdk8</artifactId>
-            <version>${kotlin.version}</version>
-        </dependency>
-        <dependency>
             <groupId>se.casaferre</groupId>
             <artifactId>data</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <!-- Spark Web Framework Test Library -->
         <dependency>
