@@ -37,19 +37,12 @@ class PersonalNumber(private val ssn: String) {
                 .subSequence(2, 11)
                 .mapIndexed { index, c ->
                     val multiplier = if (index % 2 == 0) 2 else 1
-                    calculateSwedishSsn(Character.getNumericValue(c), multiplier)
+                    val value = Character.getNumericValue(c)
+                    if(value < 9) (value * multiplier) % 9 else 9
                 }
                 .sum()
 
         return 10 - checksum % 10
-    }
-
-
-    private fun calculateSwedishSsn(value: Int, position: Int): Int {
-        if (value < 9) {
-            return (value * position) % 9
-        }
-        return 9
     }
 
     companion object {
