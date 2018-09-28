@@ -31,12 +31,37 @@ class PersonalNumberTest {
 
     @Test
     fun checksum_valid_true() {
-        assertThat(PersonalNumber("198011035188").isValid()).isTrue()
+        assertThat(PersonalNumber("198011035188").isChecksumValid()).isTrue()
     }
 
     @Test
     fun checksum_invalid_false() {
-        assertThat(PersonalNumber("198011035189").isValid()).isFalse()
+        assertThat(PersonalNumber("198011035189").isChecksumValid()).isFalse()
+    }
+
+    @Test
+    fun checksum_endsWith0_valid() {
+        assertThat(PersonalNumber("197306195640").isChecksumValid()).isTrue()
+    }
+
+    @Test
+    fun isMale_male_true() {
+        assertThat(PersonalNumber("195507078755").isMale()).isTrue()
+    }
+
+    @Test
+    fun isMale_male_false() {
+        assertThat(PersonalNumber("195507078755").isFemale()).isFalse()
+    }
+
+    @Test
+    fun isFemale_female_false() {
+        assertThat(PersonalNumber("197306195640").isMale()).isFalse()
+    }
+
+    @Test
+    fun isFemale_female_true() {
+        assertThat(PersonalNumber("197306195640").isFemale()).isTrue()
     }
 
     @Test
