@@ -12,7 +12,7 @@ import spark.template.freemarker.FreeMarkerEngine
  *
  * Created by Jorgen Andersson on 2018-07-03.
  */
-class FreemarkerController (private val cdnUrl: String) {
+class MidFreemarkerController (private val cdnUrl: String) {
 
     init {
         Spark.get("/mid", ::getMidIndex, FreeMarkerEngine())
@@ -20,6 +20,10 @@ class FreemarkerController (private val cdnUrl: String) {
 
     @Suppress("UNUSED_PARAMETER")
     private fun getMidIndex(request: Request, response: Response): ModelAndView {
+        // DEBUG
+        println("Session variables")
+        println(request.session().id())
+        println(request.session().attributes())
         val model: Map<String, Any> = mutableMapOf(
                 "baseHref" to cdnUrl,
                 "title" to "MID99"
