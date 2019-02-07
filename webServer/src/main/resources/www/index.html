@@ -3,11 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>CasaFerre</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <style>
+        .carousel-inner img {
+            margin: auto;
+        }
+    </style>
+    <script type="text/javascript" src="jslib/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="jslib/bootstrap.js"></script>
 
 </head>
 <body>
+<header class="page-header text-center">
+    <h2>CasaFerre Informatik<br/>
+        <small>Konsulttjänster inom</small>
+    </h2>
+</header>
 
-<div>This is empty on purpose</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 center-block text-center">
 
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="imgs/bg.svg" alt="First image">
+                        <div class="carousel-caption">
+                            <h5>Snomed-CT</h5>
+                            <p>Implementation och utbilding</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block" src="imgs/bg.svg" alt="Second slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>E-Hälsa</h5>
+                            <p>Projektledning och utbildning</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="imgs/bg.svg" class="d-block" alt="Third slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Annat</h5>
+                            <p>TADA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $('.carousel').carousel({
+        interval: 4000
+    });
+</script>
 </body>
 </html>
