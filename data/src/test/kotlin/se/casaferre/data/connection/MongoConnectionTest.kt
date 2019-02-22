@@ -1,13 +1,13 @@
 package se.casaferre.data.connection
 
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 class MongoConnectionTest {
 
-    @Before
-    fun setupBeforeEachMethod() {
+    @BeforeEach
+    internal fun setupBeforeEachMethod() {
         MongoConnection.resetDatabase()
     }
 
@@ -15,7 +15,7 @@ class MongoConnectionTest {
     @Test
     fun mongoConnectionGetDatabase_name_hovno() {
         MongoConnection.setConnection("mongodb://localhost:27017/xyz")
-        assertThat(MongoConnection.getDatabase().name).isEqualTo("xyz")
+        Assertions.assertEquals(MongoConnection.getDatabase().name,"xyz")
     }
 
     @Test
@@ -27,7 +27,7 @@ class MongoConnectionTest {
             // Try to set another connection
             MongoConnection.setConnection("mongodb://localhost:27017/abc")
         } catch (e: RuntimeException) {
-            assertThat(e.message).isEqualTo(expectedExceptionMessage)
+            Assertions.assertEquals(e.message,expectedExceptionMessage)
         }
     }
 }

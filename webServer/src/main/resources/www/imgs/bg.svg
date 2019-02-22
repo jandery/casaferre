@@ -1,8 +1,13 @@
 <svg width="800" height="400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" preserveAspectRatio="none">
 	<defs>
-		<style type="text/css">#holder_168c7399af6 text { fill:#333;font-weight:normal;font-family:Helvetica, monospace;font-size:40pt } </style>
+		<style type="text/css">
+			text.title { fill:#CCC; font-weight:normal; font-size:40pt; }
+			text.paragraph { fill:#CCC; font-weight:normal; font-size:18pt; }
+		</style>
 	</defs>
 	<g id="holder_168c7399af6">
 		<rect width="800" height="400" fill="#555"></rect>
+		<text class="title" x="50%" y="30%" alignment-baseline="middle" text-anchor="middle">BLAHA</text>
+		<text class="paragraph" x="50%" y="60%" alignment-baseline="middle" text-anchor="middle">BLAHA</text>
 	</g>
 </svg>

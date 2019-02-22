@@ -1,7 +1,7 @@
 package se.casaferre.blockChain
 
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 
 class BlockTest {
@@ -15,7 +15,7 @@ class BlockTest {
                 data = listOf("one", "two", "three"),
                 nonce = 9,
                 hash = "")
-        assertThat(block.data.size).isEqualTo(3)
+        Assertions.assertEquals(block.data.size,3)
     }
 
     @Test
@@ -25,6 +25,6 @@ class BlockTest {
                 data = listOf(Doc("title1", "decription 1"), Doc("title 2", "description 2")),
                 nonce = 0,
                 hash = "")
-        assertThat(docBlock.data.size).isEqualTo(2)
+        Assertions.assertEquals(docBlock.data.size, 2)
     }
 }

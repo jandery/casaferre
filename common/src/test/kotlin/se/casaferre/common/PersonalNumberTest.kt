@@ -1,7 +1,7 @@
 package se.casaferre.common
 
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 /**
  * use http://fejk.se for random Swedish SSN
@@ -11,67 +11,67 @@ class PersonalNumberTest {
 
     @Test
     fun formatValid_tooLong_false() {
-        assertThat(PersonalNumber("1993123022691").isFormatValid()).isFalse()
+        Assertions.assertFalse(PersonalNumber("1993123022691").isFormatValid())
     }
 
     @Test
     fun formatValid_tooShort_false() {
-        assertThat(PersonalNumber("19890911576").isFormatValid()).isFalse()
+        Assertions.assertFalse(PersonalNumber("19890911576").isFormatValid())
     }
 
     @Test
     fun formatValid_containingLetter_false() {
-        assertThat(PersonalNumber("19710101s000").isFormatValid()).isFalse()
+        Assertions.assertFalse(PersonalNumber("19710101s000").isFormatValid())
     }
 
     @Test
     fun formatValid_correct_true() {
-        assertThat(PersonalNumber("195507078755").isFormatValid()).isTrue()
+        Assertions.assertTrue(PersonalNumber("195507078755").isFormatValid())
     }
 
     @Test
     fun checksum_valid_true() {
-        assertThat(PersonalNumber("198011035188").isChecksumValid()).isTrue()
+        Assertions.assertTrue(PersonalNumber("198011035188").isChecksumValid())
     }
 
     @Test
     fun checksum_invalid_false() {
-        assertThat(PersonalNumber("198011035189").isChecksumValid()).isFalse()
+        Assertions.assertFalse(PersonalNumber("198011035189").isChecksumValid())
     }
 
     @Test
     fun checksum_endsWith0_valid() {
-        assertThat(PersonalNumber("197306195640").isChecksumValid()).isTrue()
+        Assertions.assertTrue(PersonalNumber("197306195640").isChecksumValid())
     }
 
     @Test
     fun isMale_male_true() {
-        assertThat(PersonalNumber("195507078755").isMale()).isTrue()
+        Assertions.assertTrue(PersonalNumber("195507078755").isMale())
     }
 
     @Test
     fun isMale_male_false() {
-        assertThat(PersonalNumber("195507078755").isFemale()).isFalse()
+        Assertions.assertFalse(PersonalNumber("195507078755").isFemale())
     }
 
     @Test
     fun isFemale_female_false() {
-        assertThat(PersonalNumber("197306195640").isMale()).isFalse()
+        Assertions.assertFalse(PersonalNumber("197306195640").isMale())
     }
 
     @Test
     fun isFemale_female_true() {
-        assertThat(PersonalNumber("197306195640").isFemale()).isTrue()
+        Assertions.assertTrue(PersonalNumber("197306195640").isFemale())
     }
 
     @Test
     fun static_valid_true() {
-        assertThat(PersonalNumber.isValid("198401093573")).isTrue()
+        Assertions.assertTrue(PersonalNumber.isValid("198401093573"))
     }
 
     @Test
     fun static_invalid_fakse() {
-        assertThat(PersonalNumber.isValid("198401093574")).isFalse()
+        Assertions.assertFalse(PersonalNumber.isValid("198401093574"))
     }
 
 }

@@ -1,21 +1,21 @@
 package se.casaferre.common
 
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 class TempeatureTest {
 
     @Test
     fun testFromCentigrade() {
         val degrees = Temperature.centigradeToFahrenheit(10.0)
-        assertThat(degrees).isBetween(49.99999, 50.00001)
+        Assertions.assertEquals(degrees,50.0, .00001)
     }
 
 
     @Test
     fun testFromFarenheit() {
         val degrees = Temperature.farenheightToCentigrade(50.0)
-        assertThat(degrees).isBetween(9.99999, 10.00001)
+        Assertions.assertEquals(degrees,10.0, .00001)
     }
 
 }

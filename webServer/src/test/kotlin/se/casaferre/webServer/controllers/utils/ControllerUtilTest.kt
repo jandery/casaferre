@@ -1,7 +1,7 @@
 package se.casaferre.webServer.controllers.utils
 
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import org.junit.jupiter.api.Assertions
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -38,24 +38,24 @@ class ControllerUtilTest {
     @Test
     fun objectToString_searilize_singleString() {
         val str = ControllerUtil.objectToString(SINGLE_OBJECT)
-        assertThat(str).isEqualTo(SINGLE_STRING)
+        Assertions.assertEquals(str,SINGLE_STRING)
     }
 
     @Test
     fun stringToObject_deserailize_singleObject() {
         val obj = ControllerUtil.stringToObject(SINGLE_STRING, Ctr::class.java)
-        assertThat(obj.title).isEqualTo("Single object title")
+        Assertions.assertEquals(obj.title,"Single object title")
     }
 
     @Test
     fun objectListToString_serialize_mutipleString() {
         val str = ControllerUtil.objectListToString(MULTIPLE_OBJECTS)
-        assertThat(str).isEqualTo(MULTIPLE_STRING)
+        Assertions.assertEquals(str,MULTIPLE_STRING)
     }
 
     @Test
     fun stringToObjects_deserialize_multipleObjects() {
         val objs = ControllerUtil.stringToObjectList(MULTIPLE_STRING, Ctr::class.java)
-        assertThat(objs).isEqualTo(MULTIPLE_OBJECTS)
+        Assertions.assertEquals(objs,MULTIPLE_OBJECTS)
     }
 }

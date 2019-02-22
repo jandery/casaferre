@@ -1,9 +1,9 @@
 package se.casaferre.webServer.controllers
 
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.BeforeClass
 import org.junit.Test
+import org.junit.jupiter.api.Assertions
 import se.casaferre.webServer.controllers.mocks.MockedMonitorService
 
 /**
@@ -36,9 +36,9 @@ class MonitorControllerTest {
         //
         val request = testController.testServer.get("/monitor/status", false)
         val response = testController.testServer.execute(request)
-        assertThat(response.code()).isEqualTo(200)
+        Assertions.assertEquals(response.code(),200)
         val body = String(response.body())
-        assertThat(body).isEqualTo("""{"status":"OK"}""")
+        Assertions.assertEquals(body,"""{"status":"OK"}""")
     }
 
     @Test
@@ -46,9 +46,9 @@ class MonitorControllerTest {
         //
         val request = testController.testServer.post("/monitor/db/write", "", false)
         val response = testController.testServer.execute(request)
-        assertThat(response.code()).isEqualTo(200)
+        Assertions.assertEquals(response.code(),200)
         val body = String(response.body())
-        assertThat(body).isEqualTo("true")
+        Assertions.assertEquals(body,"true")
     }
 
     @Test
@@ -58,8 +58,8 @@ class MonitorControllerTest {
         //
         val request = testController.testServer.get("/monitor/db/read", false)
         val response = testController.testServer.execute(request)
-        assertThat(response.code()).isEqualTo(200)
+        Assertions.assertEquals(response.code(),200)
         val body = String(response.body())
-        assertThat(body).isEqualTo("true")
+        Assertions.assertEquals(body,"true")
     }
 }
