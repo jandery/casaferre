@@ -1,4 +1,4 @@
-package se.casaferre
+package se.casaferre.webServer
 
 import io.schinzel.basicutils.configvar.ConfigVar
 import io.schinzel.basicutils.configvar.IConfigVar

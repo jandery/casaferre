@@ -11,8 +11,19 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>webServer</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>se.casaferre</groupId>
+            <artifactId>data</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>se.casaferre</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!-- EXTERNAL -->
         <!-- HTML template engine for Spark WebServer -->
         <dependency>
@@ -41,11 +52,6 @@
             <artifactId>basic-utils</artifactId>
             <version>${schinzel.version}</version>
         </dependency>
-        <dependency>
-            <groupId>se.casaferre</groupId>
-            <artifactId>data</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
         <!-- Spark Web Framework Test Library -->
         <dependency>
             <groupId>com.despegar</groupId>
@@ -53,12 +59,14 @@
             <version>${spark.test.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>se.casaferre</groupId>
-            <artifactId>common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
