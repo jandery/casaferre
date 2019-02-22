@@ -12,12 +12,8 @@
 
     <modules>
         <module>common</module>
-        <module>config</module>
-        <module>blockChain</module>
-        <module>encrypt</module>
         <module>data</module>
         <module>webServer</module>
-        <module>security</module>
     </modules>
 
 
