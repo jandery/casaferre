@@ -1,32 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>CasaFerre</title>
-    <link href="https://fonts.googleapis.com/css?family=KoHo" rel="stylesheet">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <style>
-        body { font-family: 'KoHo', sans-serif; }
-        .carousel-inner img {
-            margin: auto;
-        }
-    </style>
-    <script type="text/javascript" src="jslib/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="jslib/bootstrap.js"></script>
-
-</head>
-<body>
-<header class="page-header text-center">
-    <h2>CasaFerre Informatik<br/>
-        <small>Konsulttjänster inom</small>
-    </h2>
-</header>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 center-block text-center">
 
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div id="carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <svg width="800" height="400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" preserveAspectRatio="none">
@@ -79,12 +55,3 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    $('.carousel').carousel({
-        interval: 2000
-    });
-</script>
-</body>
-</html>

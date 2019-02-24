@@ -76,13 +76,13 @@ class ReducedHorseSystem {
 }
 
 var prioList = [
-    [ 4, 1, 2, 3, 5, 6, 7, 8, 9,10,11,14],
-    [ 9, 1, 6, 7,10,12,15],
-    [ 3, 4,10,11],
-    [ 8, 1, 3, 5, 6, 7,14],
-    [ 4, 1],
-    [ 1],
-    [ 9, 1]
+    [ 6, 1, 2, 8,10],
+    [ 4, 1, 8,12,15],
+    [ 2, 3, 9],
+    [ 6,10],
+    [ 1, 2, 3, 4, 5, 6,10,11],
+    [ 7, 1, 2, 5,10,11],
+    [ 3]
 ];
 
 
@@ -96,3 +96,20 @@ for (var i = 0; i < second.rowCount(); i++) {
 console.log("TOTAL: " + second.totalCost());
 
 
+const myfn = (list) => {
+    let resp = list
+        .map((item, index) => {
+            return {
+                index: index,
+                a: item[0],
+                b: item.slice(1)
+            }
+        })
+        .sort((first, second) => {
+            return second.b.length - first.b.length;
+        });
+
+    console.log(resp);
+};
+
+myfn(prioList);
