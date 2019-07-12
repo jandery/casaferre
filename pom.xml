@@ -21,13 +21,14 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <kmongo.version>3.6.3</kmongo.version>
-        <kotlin.version>1.2.70</kotlin.version>
-        <jackson.version>2.9.5</jackson.version>
+        <assertj.version>3.11.0</assertj.version>
+        <jackson.version>2.9.8</jackson.version>
         <junit.version>4.12</junit.version>
-        <assertj.version>3.8.0</assertj.version>
+        <kmongo.version>3.9.1</kmongo.version>
+        <kodein.version>6.2.0</kodein.version>
+        <kotlin.version>1.3.41</kotlin.version>
         <schinzel.version>1.31</schinzel.version>
-        <spark.version>2.7.2</spark.version>
+        <spark.version>2.9.0</spark.version>
         <spark.template.version>2.7.1</spark.template.version>
         <spark.test.version>1.1.6</spark.test.version>
     </properties>
@@ -37,10 +38,33 @@
             <id>maven-repo.schinzel.io</id>
             <url>http://maven-repo.schinzel.io/release</url>
         </repository>
+        <repository>
+            <id>jcenter</id>
+            <url>https://dl.bintray.com/kodein-framework/Kodein-DI</url>
+        </repository>
     </repositories>
 
 
     <dependencies>
+        <!-- Kotlin -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <!-- Dependency injection framework http://kodein.org/Kodein-DI/ -->
+        <dependency>
+            <groupId>org.kodein.di</groupId>
+            <artifactId>kodein-di-generic-jvm</artifactId>
+            <version>${kodein.version}</version>
+        </dependency>
+        <!-- Kotlin Test -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>test</scope>
+        </dependency>
         <!-- JUnit5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -53,17 +77,6 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
             <version>5.0.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jdk8</artifactId>
-            <version>${kotlin.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test</artifactId>
-            <version>${kotlin.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
