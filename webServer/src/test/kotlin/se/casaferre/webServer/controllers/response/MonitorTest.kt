@@ -1,6 +1,6 @@
 package se.casaferre.webServer.controllers.response
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions
 
 /**
@@ -9,12 +9,16 @@ import org.junit.jupiter.api.Assertions
 class MonitorTest {
 
     @Test
-    fun monitor_defaultConstructor_ok() {
-        Assertions.assertEquals(Monitor().status, "OK")
+    fun `Status with argument is OK`() {
+        Assertions.assertEquals(Monitor().status, "OK") {
+            "Status without argument failed"
+        }
     }
 
     @Test
-    fun monitor_setter_tada() {
-        Assertions.assertEquals(Monitor(status = "tada").status, "tada")
+    fun `Status with argument is Tada`() {
+        Assertions.assertEquals(Monitor(status = "tada").status, "tada") {
+            "Status with argument failed"
+        }
     }
 }

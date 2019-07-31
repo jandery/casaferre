@@ -52,13 +52,6 @@
             <artifactId>basic-utils</artifactId>
             <version>${schinzel.version}</version>
         </dependency>
-        <!-- Spark Web Framework Test Library -->
-        <dependency>
-            <groupId>com.despegar</groupId>
-            <artifactId>spark-test</artifactId>
-            <version>${spark.test.version}</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>

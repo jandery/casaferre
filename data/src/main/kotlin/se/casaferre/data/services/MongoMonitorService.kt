@@ -12,7 +12,7 @@ import se.casaferre.data.objects.MonitorDBO
  *
  * Created by Jorgen Andersson (jorgen@kollektiva.se) on 2018-07-05.
  */
-class MonitorService : IBaseService<MonitorDBO> {
+class MongoMonitorService : IBaseService<MonitorDBO> {
     // Get MongoDatabase
     private val database = MongoConnection.getDatabase()
     // MongoCollection

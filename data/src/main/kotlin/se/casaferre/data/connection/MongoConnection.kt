@@ -15,8 +15,9 @@ object MongoConnection {
 
     fun setConnection(hostUrl: String) {
         val clientURI = MongoClientURI(hostUrl)
-        val mongoClient = KMongo.createClient(clientURI)
-        DATABASE = mongoClient.getDatabase(clientURI.database)
+        DATABASE = KMongo
+                .createClient(clientURI)
+                .getDatabase(clientURI.database)
     }
 
     fun getDatabase(): MongoDatabase {
