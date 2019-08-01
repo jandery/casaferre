@@ -5,6 +5,7 @@ import org.kodein.di.generic.instance
 import se.casaferre.data.connection.MongoConnection
 import se.casaferre.data.services.MongoMonitorService
 import se.casaferre.webServer.controllers.*
+import se.casaferre.webServer.controllers.api.UsbController
 import spark.*
 import spark.Redirect.Status
 import spark.template.freemarker.FreeMarkerEngine
@@ -38,7 +39,10 @@ class WebServer(kodein: KodeinAware) {
         // Controller for monitoring
         service.path("/monitor") { MonitorController(service, MongoMonitorService()) }
         // Controller for Various good to have functions
-        service.path("/v1") { UtilsController(service) }
+        service.path("/v1") {
+            UtilsController(service)
+            UsbController(service)
+        }
 
         // Shortcuts
         service.redirect.get("/mid99", "https://boiling-torch-802.firebaseapp.com/", Status.TEMPORARY_REDIRECT)
