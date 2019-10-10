@@ -20,7 +20,8 @@ class WebServer(kodein: KodeinAware) {
     private val mongoConnection: String by kodein.instance(ContextVariable.MONGO_URL)
     private val freeMarkerEngine: FreeMarkerEngine by kodein.instance()
 
-    private val service = Service.ignite().port(serverServer.port)
+    private val service = Service.ignite()
+            .port(serverServer.port)
 
     init {
         //
@@ -40,8 +41,18 @@ class WebServer(kodein: KodeinAware) {
         service.path("/monitor") { MonitorController(service, MongoMonitorService()) }
         // Controller for Various good to have functions
         service.path("/v1") {
-            UtilsController(service)
-            UsbController(service)
+            service.path("/temp") {
+                service.get("/c2f/:degree", UtilsController.c2f)
+                service.get("/f2c/:degree", UtilsController.f2c)
+            }
+            service.path("/volume") {
+                service.get("/l2usg/:volume", UtilsController.l2usg)
+                service.get("/l2ig/:volume", UtilsController.l2ig)
+                service.get("/usg2l/:volume", UtilsController.usg2l)
+                service.get("/ig2l/:volume", UtilsController.ig2l)
+            }
+
+            service.get("/usb", UsbController.readFileSystem)
         }
 
         // Shortcuts

@@ -76,16 +76,16 @@ class ReducedHorseSystem {
 }
 
 var prioList = [
-    [ 6, 1, 2, 8,10],
-    [ 4, 1, 8,12,15],
-    [ 2, 3, 9],
-    [ 6,10],
-    [ 1, 2, 3, 4, 5, 6,10,11],
-    [ 7, 1, 2, 5,10,11],
-    [ 3]
+    [ 8, 1],
+    [ 2,15,11, 7, 5,13],
+    [ 3,12, 1, 8, 9],
+    [ 9,10, 6,12, 4, 1],
+    [ 4, 1, 2,10,11],
+    [13,14, 6, 9,12],
+    [ 1]
 ];
 
-
+/*
 console.warn("SECOND");
 var second = new ReducedHorseSystem(reducedSystems.system2, prioList);
 for (var i = 0; i < second.rowCount(); i++) {
@@ -94,7 +94,7 @@ for (var i = 0; i < second.rowCount(); i++) {
     console.log("Cost for " + i + ": " + second.rowCost(i));
 }
 console.log("TOTAL: " + second.totalCost());
-
+*/
 
 const myfn = (list) => {
     let resp = list

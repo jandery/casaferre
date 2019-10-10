@@ -3,20 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width,initial-scale=1,minimal-ui" name="viewport">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
-    <link rel="stylesheet" href="css/vue-material-1.0.0.beta.min.css">
-    <link rel="stylesheet" href="css/vue-material-theme-1.0.0.beta.min.css">
-    <style>
-
-    </style>
+    <!-- Load required Bootstrap and BootstrapVue CSS -->
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
 
     <script type="text/javascript" src="js/libs/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="js/libs/vue-2.5.3.min.js"></script>
-    <script type="text/javascript" src="js/libs/vue-material-1.0.0.beta.min.js"></script>
+    <!-- Load Vue followed by BootstrapVue -->
+    <script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>
+    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+
     <script type="text/javascript" src="js/v75.js"></script>
     <script>
-        Vue.use(VueMaterial.default);
 
         $(document).ready(function () {
             new Vue({
@@ -24,6 +21,11 @@
                 data() {
                     return {
                         race: [[], [], [], [], [], [], []]
+                    }
+                },
+                methods: {
+                    toggleSelect: function(event) {
+                        console.log("Im clicked");
                     }
                 }
 
@@ -35,72 +37,9 @@
 <body>
 <div id="app">
 
-    <md-card>
-        <md-card-header>
-            <div class="md-title">Tips</div>
-        </md-card-header>
-
-        <md-card-content>
-            <div>
-                <md-chip md-deletable>1</md-chip>
-                <md-chip md-deletable>6</md-chip>
-                <md-chip md-deletable>7</md-chip>
-            </div>
-        </md-card-content>
-
-        <md-card-content>
-            <div>
-                <md-chip md-deletable>4</md-chip>
-                <md-chip md-deletable>8</md-chip>
-                <md-chip md-deletable>9</md-chip>
-            </div>
-        </md-card-content>
-    </md-card>
-
-
-    <md-card>
-        <md-card-header>
-            <div class="md-title">Tips</div>
-        </md-card-header>
-
-        <md-card-content>
-            <md-subheader>V75-1</md-subheader>
-            <div class="separator">
-                <md-avatar class="md-avatar-icon md-large">
-                    <md-ripple>7</md-ripple>
-                </md-avatar>
-                <md-avatar class="md-avatar-icon md-large">
-                    <md-ripple>5</md-ripple>
-                </md-avatar>
-                <md-avatar class="md-avatar-icon md-large">
-                    <md-ripple>3</md-ripple>
-                </md-avatar>
-                <md-avatar class="md-avatar-icon md-large">
-                    <md-ripple>10</md-ripple>
-                </md-avatar>
-            </div>
-        </md-card-content>
-
-        <md-divider></md-divider>
-
-        <md-card-content>
-            <md-subheader>V75-2</md-subheader>
-            <div class="separator">
-                <md-avatar class="md-avatar-icon md-large">
-                    <md-ripple>7</md-ripple>
-                </md-avatar>
-                <md-avatar class="md-avatar-icon md-large">
-                    <md-ripple>5</md-ripple>
-                </md-avatar>
-                <md-avatar class="md-avatar-icon md-large">
-                    <md-ripple>3</md-ripple>
-                </md-avatar>
-                <md-avatar class="md-avatar-icon md-large">
-                    <md-ripple>10</md-ripple>
-                </md-avatar>
-            </div>
-        </md-card-content>
-    </md-card>
+    <b-card v-for="race in 7" :key="race">
+        <b-button pill v-for="horseNumber in 15">{{horseNumber}}</b-button>
+    </b-card>
 
 </div>
 </body>
