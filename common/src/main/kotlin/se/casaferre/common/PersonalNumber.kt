@@ -16,8 +16,6 @@ import java.util.regex.Pattern
  */
 class PersonalNumber(private val ssn: String) {
 
-    private val SWEDISH_SSN_PATTERN_FULL = Pattern.compile("^(19|20)[0-9]{6}[0-9]{4}$")
-
     /**
      * Is the Format and Checksum valid
      */
@@ -43,14 +41,14 @@ class PersonalNumber(private val ssn: String) {
      * Does this SSN belong to male
      */
     fun isMale(): Boolean {
-        return isValid() && Character.getNumericValue(ssn.get(10)) % 2 != 0
+        return isValid() && Character.getNumericValue(ssn[10]) % 2 != 0
     }
 
     /**
      * Does this SSN belong to female
      */
     fun isFemale(): Boolean {
-        return isValid() && Character.getNumericValue(ssn.get(10)) % 2 == 0
+        return isValid() && Character.getNumericValue(ssn[10]) % 2 == 0
     }
 
     /**
@@ -89,6 +87,8 @@ class PersonalNumber(private val ssn: String) {
     }
 
     companion object {
+        private val SWEDISH_SSN_PATTERN_FULL = Pattern.compile("^(19|20)[0-9]{6}[0-9]{4}$")
+
         fun isValid(ssn: String): Boolean {
             return PersonalNumber(ssn).isValid()
         }

@@ -6,6 +6,7 @@ import se.casaferre.data.connection.MongoConnection
 import se.casaferre.data.services.MongoMonitorService
 import se.casaferre.webServer.controllers.*
 import se.casaferre.webServer.controllers.api.UsbController
+import se.casaferre.webServer.controllers.utils.PropertyUtil
 import spark.*
 import spark.Redirect.Status
 import spark.template.freemarker.FreeMarkerEngine
@@ -58,6 +59,8 @@ class WebServer(kodein: KodeinAware) {
         // Shortcuts
         service.redirect.get("/mid99", "https://boiling-torch-802.firebaseapp.com/", Status.TEMPORARY_REDIRECT)
 
+
+        println("Message is ${PropertyUtil.readHejmo()}")
     }
 
     fun start() {

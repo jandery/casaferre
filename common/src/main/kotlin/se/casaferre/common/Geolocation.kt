@@ -1,5 +1,10 @@
 package se.casaferre.common
 
+import java.lang.Math.pow
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.sin
+
 /**
  * Purpose of this file is holding a Geolocation position
  *
@@ -18,13 +23,13 @@ data class Geolocation(val latitude: Double, val longitude: Double) {
         val dLat = Math.toRadians(geolocation.latitude - this.latitude)
         val dLng = Math.toRadians(geolocation.longitude - this.longitude)
 
-        val sindLat = Math.sin(dLat / 2)
-        val sindLng = Math.sin(dLng / 2)
+        val sindLat = sin(dLat / 2)
+        val sindLng = sin(dLng / 2)
 
-        val a = Math.pow(sindLat, 2.0) + (Math.pow(sindLng, 2.0)
-                * Math.cos(Math.toRadians(this.latitude)) * Math.cos(Math.toRadians(geolocation.latitude)))
+        val a = pow(sindLat, 2.0) + (pow(sindLng, 2.0)
+                * cos(Math.toRadians(this.latitude)) * cos(Math.toRadians(geolocation.latitude)))
 
-        val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+        val c = 2 * atan2(kotlin.math.sqrt(a), kotlin.math.sqrt(1 - a))
 
         return earthRadius * c
     }
